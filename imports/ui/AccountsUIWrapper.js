@@ -7,13 +7,13 @@ export default class AccountsUIWrapper extends Component {
   componentDidMount(){
     // Use blaze to render login buttons
     this.view = Blaze.render( Template.loginButtons,
-      ReactDOM.findDOMNode(this.refs.container));
+      ReactDOM.findDOMNode(this.refs.accountswrapper));
   }
   componentWillUnmount(){
     // Remove Blaze View on Unmount
     Blaze.remove(this.view);
   }
   render(){
-    return <span ref="container" />
+    return <span ref="accountswrapper" />
   }
 }
