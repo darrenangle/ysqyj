@@ -2,7 +2,19 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-Schema.UserProfile = new SimpleSchema({
+const UserSchema = {};
+
+UserSchema.UserCountry = new SimpleSchema({
+    name: {
+        type: String
+    },
+    code: {
+        type: String,
+        regEx: /^[A-Z]{2}$/
+    }
+});
+
+UserSchema.UserProfile = new SimpleSchema({
     firstName: {
         type: String,
         optional: true
@@ -21,13 +33,13 @@ Schema.UserProfile = new SimpleSchema({
         optional: true
     },
     country: {
-        type: Schema.UserCountry,
+        type: UserSchema.UserCountry,
         optional: true
     }
 });
 
 
-Schema.User = new SimpleSchema({
+UserSchema.User = new SimpleSchema({
     // Business Logic Schema
     name: {
       type: String,
@@ -57,7 +69,7 @@ Schema.User = new SimpleSchema({
     over18: {
       type: Boolean,
       allowedValues: [true]
-    }
+    },
 
     emails: {
         type: Array,
@@ -80,7 +92,7 @@ Schema.User = new SimpleSchema({
         type: Date
     },
     profile: {
-        type: Schema.UserProfile,
+        type: UserSchema.UserProfile,
         optional: true
     },
     // Make sure this services field is in your schema if you're using any of the accounts packages
@@ -108,3 +120,5 @@ Schema.User = new SimpleSchema({
         optional: true
     }
 });
+
+Meteor.users.attachSchema(UserSchema.User);
