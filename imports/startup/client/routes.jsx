@@ -6,7 +6,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import { App } from '../../ui/layouts/app.jsx';
 import { Index } from '../../ui/components/index.jsx';
-
+import QuickLogin from '../../ui/pages/login.jsx';
 
 // Admin Pages & Components
 import AdminStart from '../../ui/pages/admin/admin-start.jsx';
@@ -20,6 +20,8 @@ import { PageTwo } from '../../ui/pages/two.jsx';
 import { Hello } from '../../ui/pages/hello.jsx';
 import { NotFound } from '../../ui/pages/not-found.jsx';
 
+// Route onEnter functions
+import { requireAdmin } from './route-security.js'
 
 const requireAuth = () => {
   let currentUser = Meteor.user();
@@ -30,23 +32,26 @@ const requireAuth = () => {
   }
 }
 
-const requireAdmin = () => {
-  console.log('admin-role-required');
-}
+// const requireAdmin = () => {
+//   console.log('admin-role-required');
+// }
 
 Meteor.startup( () => {
   render(
     <Router history={ browserHistory }>
       <Route path='/' component={ App }>
         <IndexRoute component={ Index } />
+        <Route path='/login' component={QuickLogin} />
+
+        {/* Learning Routes TO BE DELETED*/}
         <Route path='/one' component={ PageOne }/>
         <Route path='/two' component={ PageTwo }/>
         <Route path='/hello/:name' component={ Hello } onEnter={ requireAuth } />
 
         {/* Admin Routes */}
-        <Route path='admin' component={ AdminStart } />
-        <Route path='/admin/responses' component={ AdminResponseIndex } />
-        <Route path='/admin/responses/:id' component={ AdminClientResponse } />
+        <Route path='admin' component={ AdminStart } onEnter={ requireAdmin }/>
+        <Route path='/admin/responses' component={ AdminResponseIndex } onEnter={ requireAdmin }/>
+        <Route path='/admin/responses/:id' component={ AdminClientResponse } onEnter={ requireAdmin }/>
 
         {/* Not Found */}
         <Route path='*' component={ NotFound }/>
