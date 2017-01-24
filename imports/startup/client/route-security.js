@@ -8,8 +8,10 @@ export const requireAdmin = (nextState, replace, callback) => {
     callback();
   }
 
-  Meteor.call('roles.isAnAdminAccount', currentUserId, function(res){
-    if (res !== "this-is-allowed"){
+  Meteor.call('roles.isAnAdminAccount', currentUserId, function(error, result){
+    if (error) console.log(error);
+    
+    if (result !== "this-is-allowed"){
       replace({ pathname: '/' })
     }
     callback();
