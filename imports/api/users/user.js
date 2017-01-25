@@ -44,7 +44,8 @@ UserSchema.User = new SimpleSchema({
     name: {
       type: String,
       max: 200,
-      denyUpdate: true
+      denyUpdate: true,
+      optional: true
     },
     hasPaid: {
       type: Boolean
@@ -60,15 +61,17 @@ UserSchema.User = new SimpleSchema({
     },
     responseStatus: {
       type: String,
-      allowedValues: ['Response Not Recieved', 'Response In Progress', 'Response Recieved']
+      allowedValues: ['Response Not Received', 'Response In Progress', 'Response Recieved']
     },
     agreedToTerms: {
       type: Boolean,
-      allowedValues: [true]
+      allowedValues: [true],
+      optional: true,
     },
     over18: {
       type: Boolean,
-      allowedValues: [true]
+      allowedValues: [true],
+      optional: true,
     },
 
     emails: {

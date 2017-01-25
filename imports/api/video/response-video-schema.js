@@ -90,6 +90,11 @@ ResponseVideoSchema.ResponseVideo = new SimpleSchema({
     type: Boolean,
     label: "Does this video have a transcript?"
   },
+  audioFileURL:{
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+    label: "The URL for the audio of this vid"
+  },
   transcriptText: {
     type:String,
     max: 5000,
