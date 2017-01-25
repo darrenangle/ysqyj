@@ -52,6 +52,9 @@ Meteor.startup( () => {
         <Route path='admin' component={ AdminStart } onEnter={ requireAdmin }/>
         <Route path='/admin/responses' component={ AdminResponseIndex } onEnter={ requireAdmin }/>
         <Route path='/admin/responses/:id' component={ AdminClientResponse } onEnter={ requireAdmin }/>
+        <Route path='/admin/clients' component={ clientStatusList } onEnter={ requireAdmin }/>
+
+
 
         {/* Not Found */}
         <Route path='*' component={ NotFound }/>

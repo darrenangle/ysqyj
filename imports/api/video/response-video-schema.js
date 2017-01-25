@@ -23,7 +23,7 @@ ResponseVideoSchema.ResponseVideo = new SimpleSchema({
   },
   createdAt: {
     type: Date,
-    label: "Day the survey was completed",
+    label: "Day the response video was uploaded",
     denyUpdate: true
   },
   updatedAt: {
