@@ -61,7 +61,7 @@ UserSchema.User = new SimpleSchema({
     },
     responseStatus: {
       type: String,
-      allowedValues: ['Response Not Received', 'Response In Progress', 'Response Recieved']
+      allowedValues: ['Response Not Received', 'Response In Progress', 'Response Received']
     },
     agreedToTerms: {
       type: Boolean,

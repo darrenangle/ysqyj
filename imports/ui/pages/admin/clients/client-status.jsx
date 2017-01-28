@@ -4,14 +4,36 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 
 export class ClientStatusList extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      hideResponseComplete: false,
+    };
+  }
+
+
+  toggleRespondedClients(){
+    this.setState({
+      hideResponseComplete: !this.state.hideCompleted,
+    })
+  }
 
   renderClients(){
-
+    let filteredClients = this.props.clients;
+    if(this.state.hideResponseComplete){
+      filteredClients = filteredClients.filter(client => client.responseStatus == 'Response Received')
+    }
+    return filteredClients.map((client) => {
+      console.log(client);
+      return(
+        <p> Client: <strong>{client.emails[0].address}</strong></p>
+      )
+    })
   }
 
   render(){
     return(
-      <div>
+      <div className='container'>
         <h1>Client Status List</h1>
         <ul>
           { this.renderClients() }
