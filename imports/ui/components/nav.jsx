@@ -2,9 +2,11 @@ import React from 'react';
 import { IndexLink, Link } from 'react-router';
 
 export const Navigation = () => (
-  <ul>
-    <li><IndexLink to="/" activeClassName="active">Index</IndexLink></li>
-    <li><Link to="/one" activeClassName="active">Page One</Link></li>
-    <li><Link to="/two" activeClassName="active">Page Two</Link></li>
-  </ul>
+  <div>
+    <span><IndexLink to="/" activeClassName="active">Index </IndexLink></span>
+    <span><Link to="/terms" activeClassName="active">Terms </Link></span>
+    <span><Link to="/privacy" activeClassName="active">Privacy </Link></span>
+    <span><Link to="/disclaimer" activeClassName="active">disclaimer </Link></span>
+    <span><Link to="/admin/clients" activeClassName="active">Clients </Link></span>
+  </div>
 )
