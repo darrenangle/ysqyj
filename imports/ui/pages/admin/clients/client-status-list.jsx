@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
+import SingleClientStatus from './single-client-status.jsx';
 
 
 export class ClientStatusList extends Component {
@@ -10,7 +11,6 @@ export class ClientStatusList extends Component {
       hideResponseComplete: false,
     };
   }
-
 
   toggleRespondedClients(){
     this.setState({
@@ -24,9 +24,16 @@ export class ClientStatusList extends Component {
       filteredClients = filteredClients.filter(client => client.responseStatus == 'Response Received')
     }
     return filteredClients.map((client) => {
-      console.log(client);
       return(
-        <p> Client: <strong>{client.emails[0].address}</strong></p>
+          <SingleClientStatus
+            key={client._id}
+            responseStatus={client.responseStatus}
+            name={client.name || 'no name'}
+            hasPaid={client.hasPaid}
+            appointmentStatus={client.appointmentStatus}
+            emails={client.emails}
+            services={client.services}
+          />
       )
     })
   }

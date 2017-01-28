@@ -12,7 +12,7 @@ import QuickLogin from '../../ui/pages/login.jsx';
 import AdminStart from '../../ui/pages/admin/admin-start.jsx';
 import AdminResponseIndex from '../../ui/pages/admin/responses/index.jsx';
 import AdminClientResponse from '../../ui/pages/admin/responses/client-response.jsx';
-import ClientStatusList from '../../ui/pages/admin/clients/client-status.jsx'
+import ClientStatusList from '../../ui/pages/admin/clients/client-status-list.jsx';
 
 // Legal Pages
 import DisclaimerWrapper from '../../ui/pages/legal/disclaimer-wrapper.jsx';
