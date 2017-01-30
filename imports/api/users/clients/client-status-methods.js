@@ -14,5 +14,16 @@ Meteor.methods({
     } else {
       console.log('You aren\'t supposed to do that!')
     }
-  }
+  },
+  'client.setAppointmentStatus'(clientId, newAppointmentStatus){
+    check(newAppointmentStatus, String);
+
+    if(isAdmin(this.userId)){
+      console.log('Admin detected, changing response status.')
+      Meteor.users.update(clientId, { $set: { appointmentStatus: newAppointmentStatus } });
+    } else {
+      console.log('You aren\'t supposed to do that!')
+    }
+  },
+
 });

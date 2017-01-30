@@ -28,11 +28,12 @@ export class ClientStatusList extends Component {
           <SingleClientStatus
             key={client._id}
             responseStatus={client.responseStatus}
-            name={client.name || 'no name'}
+            name={client.name || 'Jon Noone'}
             hasPaid={client.hasPaid}
             appointmentStatus={client.appointmentStatus}
             emails={client.emails}
             services={client.services}
+            id={client._id} 
           />
       )
     })
