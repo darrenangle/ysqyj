@@ -11,17 +11,17 @@ export default class SingleClientStatus extends Component {
     }
   }
   setResponseStatus(newResponseStatus){
-    Meteor.call('client.setResponseStatus', this.props.id, newResponseStatus );
+    Meteor.call('client.setResponseStatus', this.props.client._id, newResponseStatus );
   }
   setAppointmentStatus(newAppointmentStatus){
     console.log(this);
-    Meteor.call('client.setAppointmentStatus', this.props.id, newAppointmentStatus );
+    Meteor.call('client.setAppointmentStatus', this.props.client._id, newAppointmentStatus );
   }
   toggleHasPaid(){
-    Meteor.call('client.toggleHasPaid',this.props.id, !this.props.hasPaid);
+    Meteor.call('client.toggleHasPaid',this.props.client._id, !this.props.hasPaid);
   }
   getPaidStatus(){
-    if(this.props.hasPaid){
+    if(this.props.client.hasPaid){
       return 'Paid'
     } else {
       return 'Has Not Paid'
@@ -32,12 +32,12 @@ export default class SingleClientStatus extends Component {
     return(
       <div className='col-sm-12 col-md-6 col-lg-4'>
         <div className='single-client'>
-          <h3>{this.props.name}</h3>
-          <h4>{this.props.emails[0].address}</h4>
+          <h3>{this.props.client.name || this.props.client.emails[0].address}</h3>
+          <h4>{this.props.client.emails[0].address}</h4>
           <h5>{ this.getPaidStatus()}</h5>
           <hr/>
           <h5>Appointment Status: </h5>
-          <h4><strong>{this.props.appointmentStatus}</strong></h4>
+          <h4><strong>{this.props.client.appointmentStatus}</strong></h4>
           <p>Change Status:<br/>
             <a href='#' onClick={() =>{this.setAppointmentStatus('Scheduled')}}> Scheduled </a>
             |<a href='#' onClick={() =>{this.setAppointmentStatus('Not Scheduled')}}> Not Scheduled </a>
@@ -45,13 +45,13 @@ export default class SingleClientStatus extends Component {
           </p>
           <hr/>
           <h5>Response Status: </h5>
-          <h4><strong>{this.props.responseStatus}</strong></h4>
+          <h4><strong>{this.props.client.responseStatus}</strong></h4>
             <p>Change Status:<br/>
               <a href='#' onClick={() =>{this.setResponseStatus('Response Not Started')}}> Not Started </a>
               |<a href='#' onClick={() =>{this.setResponseStatus('Response In Progress')}}> In Progress </a>
               |<a href='#' onClick={() =>{this.setResponseStatus('Response Received')}}> Received</a>
             </p>
-          <h4><Link to={`/admin/responses/${this.props.id}`}> {this.props.name}s Response</Link></h4>
+          <h4><Link to={`/admin/responses/${this.props.client._id}`}> {this.props.client.name || this.props.client.emails[0].address +"'"}s Response</Link></h4>
         </div>
       </div>
     )

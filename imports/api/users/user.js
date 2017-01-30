@@ -6,7 +6,8 @@ const UserSchema = {};
 
 UserSchema.UserCountry = new SimpleSchema({
     name: {
-        type: String
+        type: String,
+        max: 500
     },
     code: {
         type: String,

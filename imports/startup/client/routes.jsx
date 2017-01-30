@@ -2,13 +2,15 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-Link = Router.Link;
 
 // Components & Wrappers
 
 import { App } from '../../ui/layouts/app.jsx';
 import { Index } from '../../ui/components/index.jsx';
+
+// User Account MGMT Routes
 import QuickLogin from '../../ui/pages/login.jsx';
+import GetStarted from '../../ui/pages/onboarding/get-started.jsx';
 
 // Admin Pages & Components
 import AdminStart from '../../ui/pages/admin/admin-start.jsx';
@@ -49,12 +51,16 @@ Meteor.startup( () => {
     <Router history={ browserHistory }>
       <Route path='/' component={ App }>
         <IndexRoute component={ Index } />
-        <Route path='/login' component={QuickLogin} />
+
 
         {/* Learning Routes TO BE DELETED*/}
         <Route path='/one' component={ PageOne }/>
         <Route path='/two' component={ PageTwo }/>
         <Route path='/hello/:name' component={ Hello } onEnter={ requireAuth } />
+
+        {/* User Routes*/}
+        <Route path='/login' component={QuickLogin} />
+        <Route path='/get-started' component={GetStarted} />
 
         {/* Admin Routes */}
         <Route path='admin' component={ AdminStart } onEnter={ requireAdmin }/>
