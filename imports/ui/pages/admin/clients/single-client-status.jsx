@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import './client-grid.scss'
+import { Router, Route, Link, browserHistory } from 'react-router'
+
 
 export default class SingleClientStatus extends Component {
   constructor(props){
@@ -18,12 +20,6 @@ export default class SingleClientStatus extends Component {
   toggleHasPaid(){
     Meteor.call('client.toggleHasPaid',this.props.id, !this.props.hasPaid);
   }
-  testEvent(a,b,c){
-    console.log(this.refs[0])
-    console.log(a,b,c);
-    console.log(this);
-  }
-
   getPaidStatus(){
     if(this.props.hasPaid){
       return 'Paid'
@@ -55,6 +51,7 @@ export default class SingleClientStatus extends Component {
               |<a href='#' onClick={() =>{this.setResponseStatus('Response In Progress')}}> In Progress </a>
               |<a href='#' onClick={() =>{this.setResponseStatus('Response Received')}}> Received</a>
             </p>
+          <h4><Link to={`/admin/responses/${this.props.id}`}> {this.props.name}s Response</Link></h4>
         </div>
       </div>
     )

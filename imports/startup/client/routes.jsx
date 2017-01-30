@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
+Link = Router.Link;
+
 // Components & Wrappers
 
 import { App } from '../../ui/layouts/app.jsx';
@@ -57,7 +59,7 @@ Meteor.startup( () => {
         {/* Admin Routes */}
         <Route path='admin' component={ AdminStart } onEnter={ requireAdmin }/>
         <Route path='/admin/responses' component={ AdminResponseIndex } onEnter={ requireAdmin }/>
-        <Route path='/admin/responses/:id' component={ AdminClientResponse } onEnter={ requireAdmin }/>
+        <Route name='clientResponse' path='/admin/responses/:id' component={ AdminClientResponse } onEnter={ requireAdmin }/>
         <Route path='/admin/clients' component={ ClientStatusList } onEnter={ requireAdmin }/>
 
         {/* Legal & Terms */}
