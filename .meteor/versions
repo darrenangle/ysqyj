@@ -40,6 +40,7 @@ es5-shim@4.6.15
 facebook@1.2.8
 fastclick@1.0.13
 fourseven:scss@3.13.0
+froatsnook:valid-email@1.0.0
 geojson-utils@1.0.10
 google@1.1.13
 hot-code-push@1.0.4

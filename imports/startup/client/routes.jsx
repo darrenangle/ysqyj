@@ -6,7 +6,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 // Components & Wrappers
 
 import { App } from '../../ui/layouts/app.jsx';
-import { Index } from '../../ui/components/index.jsx';
+import HomePageLanding from '../../ui/pages/landing/homepage-wrapper.jsx';
 
 // User Account MGMT Routes
 import QuickLogin from '../../ui/pages/login.jsx';
@@ -50,7 +50,7 @@ Meteor.startup( () => {
   render(
     <Router history={ browserHistory }>
       <Route path='/' component={ App }>
-        <IndexRoute component={ Index } />
+        <IndexRoute component={ HomePageLanding } />
 
 
         {/* Learning Routes TO BE DELETED*/}
