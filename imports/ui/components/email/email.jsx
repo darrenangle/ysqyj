@@ -37,7 +37,7 @@ export default class GeneralSignUp extends Component {
     let inputClassnames = classnames('form-control', {badEmail: this.state.badEmail });
     return(
       <div className="col-sm-8 email-wrapper">
-        <p className='email-signup-copy'>In the meantime, sign up for our mailing list.</p>
+        <p className='email-signup-copy'>Sign up for our mailing list:</p>
         <div className="input-group">
           <input type="text"
             ref="emailInput"
