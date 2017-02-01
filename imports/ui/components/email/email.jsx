@@ -9,9 +9,10 @@ export default class GeneralSignUp extends Component {
     super(props);
     this.state = {
       value: '',
-      badEmail: false
+      badEmail: false,
+      submitted: false
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.inputChange = this.inputChange.bind(this);
     this.submitEmail = this.submitEmail.bind(this);
   }
 
@@ -21,10 +22,13 @@ export default class GeneralSignUp extends Component {
       let t = this;
       Meteor.call('addEmailtoGeneralList', email, function(err,res){
         if(err){
-          console.log(err)
+          console.log(err);
         } else {
-          console.log(res)
-          t.setState({value: ''});
+          console.log(res);
+          t.setState({
+            value: 'Thanks! More soon.',
+            submitted: true
+          });
         }
 
       })
@@ -36,10 +40,9 @@ export default class GeneralSignUp extends Component {
 
   }
 
-  handleChange(event) {
+  inputChange(event) {
     this.setState({value: event.target.value});
     this.setState({badEmail: false});
-
   }
 
   render(){
@@ -52,8 +55,9 @@ export default class GeneralSignUp extends Component {
             ref="emailInput"
             className={inputClassnames}
             value={this.state.value}
-            onChange={this.handleChange}
+            onChange={this.inputChange}
             placeholder="Enter your email"
+            disabled={this.state.submitted}
           />
           <span className="input-group-btn">
             <button className="btn btn-info" type="button" onClick={this.submitEmail}>Go</button>

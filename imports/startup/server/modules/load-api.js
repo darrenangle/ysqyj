@@ -9,9 +9,15 @@ import '/imports/api/users/admin-user-publications.js'
   //Client-specific
   import '/imports/api/users/clients/client-status-methods.js'
 
-// Video
+// Responses
+import '/imports/api/responses/response-methods.js';
+import '/imports/api/responses/response-schema.js';
   // Response Video Schema
   import '/imports/api/video/response-video-schema.js';
+
+// Videos
+  import '/imports/api/video/video-methods.js';
+  import '/imports/api/video/video-publications.js';
 
 // email
 import '/imports/api/email/list-methods.js';
