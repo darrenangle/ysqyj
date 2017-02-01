@@ -15,10 +15,19 @@ export default class GeneralSignUp extends Component {
     this.submitEmail = this.submitEmail.bind(this);
   }
 
-  submitEmail(emailAddress){
+  submitEmail(){
     let email = this.state.value;
     if(IsValidEmail(email)){
-      console.log('valid');
+      let t = this;
+      Meteor.call('addEmailtoGeneralList', email, function(err,res){
+        if(err){
+          console.log(err)
+        } else {
+          console.log(res)
+          t.setState({value: ''});
+        }
+
+      })
       this.setState({badEmail: false});
     } else {
       console.log('invalid');

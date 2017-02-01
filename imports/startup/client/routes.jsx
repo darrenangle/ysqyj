@@ -61,6 +61,8 @@ Meteor.startup( () => {
         {/* User Routes*/}
         <Route path='/login' component={QuickLogin} />
         <Route path='/get-started' component={GetStarted} />
+        {/*<Route path='/responses/:id' component={ AdminClientResponse } onEnter={ requireOwner }/> */}
+
 
         {/* Admin Routes */}
         <Route path='admin' component={ AdminStart } onEnter={ requireAdmin }/>

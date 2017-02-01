@@ -12,4 +12,6 @@ import '/imports/api/users/admin-user-publications.js'
 // Video
   // Response Video Schema
   import '/imports/api/video/response-video-schema.js';
-  
+
+// email
+import '/imports/api/email/list-methods.js';
