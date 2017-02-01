@@ -40,6 +40,8 @@ ResponseSchema.Response = new SimpleSchema({
     type:String,
     denyUpdate: true,
     regEx: SimpleSchema.RegEx.Id,
+    index: true,
+    unique: true,
     label: "The ID of the Client's User object"
   },
   personalMessage: {
@@ -66,3 +68,5 @@ ResponseSchema.Response = new SimpleSchema({
   }
 
 })
+
+Responses.attachSchema(ResponseSchema.Response);

@@ -27,6 +27,17 @@ export default class SingleClientStatus extends Component {
       return 'Has Not Paid'
     }
   }
+  createResponse(clientId){
+    Meteor.call('response.responseExists', clientId, function(err,res){
+      if(err){ console.log(err)}
+      console.log(res);
+      if(res == false){
+        console.log('response doesn\'t exist yet, creating response doc')
+      } else {
+        console.log('response doc already exists for this user')
+      }
+    })
+  }
 
   render(){
     return(
@@ -51,7 +62,13 @@ export default class SingleClientStatus extends Component {
               |<a href='#' onClick={() =>{this.setResponseStatus('Response In Progress')}}> In Progress </a>
               |<a href='#' onClick={() =>{this.setResponseStatus('Response Received')}}> Received</a>
             </p>
-          <h4><Link to={`/admin/responses/${this.props.client._id}`}> {this.props.client.name || this.props.client.emails[0].address +"'"}s Response</Link></h4>
+          <h4>
+            <Link
+              onClick={()=>{this.createResponse(this.props.client._id)}}
+              to={`/admin/responses/${this.props.client._id}`}>
+              {this.props.client.name || this.props.client.emails[0].address +"'"}s Response
+            </Link>
+          </h4>
         </div>
       </div>
     )
