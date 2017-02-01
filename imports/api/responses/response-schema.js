@@ -59,7 +59,8 @@ ResponseSchema.Response = new SimpleSchema({
     optional: true
   },
   additionalResponseVideoIds: {
-    type: Array
+    type: Array,
+    optional: true
   },
   "additionalResponseVideoIds.$":{
     type: String,

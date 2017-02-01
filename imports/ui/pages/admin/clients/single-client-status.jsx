@@ -33,6 +33,11 @@ export default class SingleClientStatus extends Component {
       console.log(res);
       if(res == false){
         console.log('response doesn\'t exist yet, creating response doc')
+        // Create response doc
+        Meteor.call('response.createResponseDoc', clientId, function(err,res){
+          if(err) console.log(err);
+          console.log(res);
+        })
       } else {
         console.log('response doc already exists for this user')
       }

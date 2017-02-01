@@ -20,7 +20,7 @@ Meteor.methods({
   'response.createResponseDoc'(clientId){
     // Verify current user is Admin
     if(isAdmin(this.userId)){
-      Responses.insert({
+      return Responses.insert({
         owner: clientId,
         createdAt: new Date()
       })
