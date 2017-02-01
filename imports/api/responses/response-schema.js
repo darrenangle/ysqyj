@@ -36,7 +36,7 @@ ResponseSchema.Response = new SimpleSchema({
     denyInsert: true,
     optional: true
   },
-  userId: {
+  owner: {
     type:String,
     denyUpdate: true,
     regEx: SimpleSchema.RegEx.Id,

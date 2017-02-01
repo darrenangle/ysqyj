@@ -8,3 +8,11 @@ export const isAdmin = (userId) => {
     return true
   }
 }
+
+export const isOwner = (userId, doc) => {
+  if(doc.owner == userId) {
+    return true;
+  } else {
+    return false;
+  }
+}
