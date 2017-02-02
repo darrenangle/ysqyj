@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
+import Textarea from 'react-textarea-autosize';
 
 export class PersonalMessage extends Component {
   constructor(props){
@@ -34,7 +35,9 @@ export class PersonalMessage extends Component {
   render(){
     return(
       <p className='personal-message'>
-        <input type="text"
+        <Textarea
+          className='personal-message-input'
+          type="text"
           ref="personalMessageInput"
           value={this.state.message}
           onChange={this.handleInputChange}

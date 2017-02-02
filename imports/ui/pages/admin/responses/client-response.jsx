@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Responses } from '../../../../../imports/api/responses/response-schema.js';
 import { PersonalMessage } from './personal-message.jsx';
+import './pm.scss';
 
 export class AdminClientResponse extends React.Component {
     constructor(props){
