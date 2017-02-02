@@ -1,0 +1,45 @@
+import React, { Component, PropTypes } from 'react';
+import { Meteor } from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data';
+
+export class PersonalMessage extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      message: this.props.response.personalMessage || 'Personal message goes here.'
+    }
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.updatePMonDoc = _.debounce(this.updatePMonDoc.bind(this), 1000)
+  }
+
+  updatePMonDoc(){
+    let id = this.props.response._id;
+    let message = this.state.message;
+    Meteor.call(
+      'response.updatePersonalMessage',
+      id,
+      message,
+      function(err, res){
+        if(err){ console.log(err)}
+        if(res){ console.log(res)}
+    })
+  }
+
+
+  handleInputChange(event){
+    this.setState({message: event.target.value});
+    this.updatePMonDoc();
+  }
+
+  render(){
+    return(
+      <p className='personal-message'>
+        <input type="text"
+          ref="personalMessageInput"
+          value={this.state.message}
+          onChange={this.handleInputChange}
+        />
+      </p>
+    )
+  }
+}

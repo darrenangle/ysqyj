@@ -27,6 +27,18 @@ Meteor.methods({
     } else {
       return 'not-authorized'
     }
+  },
+  'response.updatePersonalMessage'(responseId,newPersonalMessage){
+    if(isAdmin(this.userId)){
 
+      Responses.update({ _id: responseId }, { $set: { personalMessage: newPersonalMessage } }, function(err, docNum){
+        if(!err){
+          return 'updated!'
+        }
+      });
+
+    } else {
+      return 'not-authorized'
+    }
   }
 })
