@@ -41,6 +41,7 @@ export class PersonalMessage extends Component {
           ref="personalMessageInput"
           value={this.state.message}
           onChange={this.handleInputChange}
+          maxLength="2000"
         />
       </p>
     )

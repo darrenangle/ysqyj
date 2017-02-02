@@ -20,6 +20,7 @@ export class AdminClientResponse extends React.Component {
       return(
         <div className='container'>
           <h1>Response for {client.name}</h1>
+          <hr/>
           <PersonalMessage
             response={response}
           />

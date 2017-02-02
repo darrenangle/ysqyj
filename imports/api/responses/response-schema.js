@@ -44,6 +44,11 @@ ResponseSchema.Response = new SimpleSchema({
     unique: true,
     label: "The ID of the Client's User object"
   },
+  responseType:{
+    type: String,
+    allowedValues: ['Breakthrough', 'Paradigm Shift'],
+    optional:true
+  },
   personalMessage: {
     type: String,
     label: "Personal Message to the client to go with Recap video",
