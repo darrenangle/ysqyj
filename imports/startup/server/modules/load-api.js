@@ -17,8 +17,10 @@ import '../../../../imports/api/responses/response-publications.js';
   import '../../../../imports/api/video/response-video-schema.js';
 
 // Videos
-  import '../../../../imports/api/video/video-methods.js';
-  import '../../../../imports/api/video/video-publications.js';
+import '../../../../imports/api/video/video-methods.js';
+import '../../../../imports/api/video/video-publications.js';
+import '../../../../imports/api/video/video-upload-rules.js';
+
 
 // email
 import '../../../../imports/api/email/list-methods.js';
