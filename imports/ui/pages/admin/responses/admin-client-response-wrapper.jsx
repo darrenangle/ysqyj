@@ -1,8 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
+// Collections
 import { Responses } from '../../../../../imports/api/responses/response-schema.js';
-import { PersonalMessage } from './personal-message.jsx';
+
+// Client Response (Admin View) Components
+import { PersonalMessage } from './components/personal-message.jsx';
+import { RecapVideo } from './components/recap-video.jsx';
+
+// Styles
 import './pm.scss';
 
 export class AdminClientResponse extends React.Component {
@@ -22,7 +28,13 @@ export class AdminClientResponse extends React.Component {
           <h1>Response for {client.name}</h1>
           <hr/>
           <PersonalMessage
-            response={response}
+            responseId={response._id}
+            personalMessage={response.personalMessage || 'No Personal Message Yet'}
+          />
+          <hr/>
+          <RecapVideo
+            responseId={response._id}
+            videoId={response.recapVideoId || "No recapVideoId"}
           />
         </div>
       )

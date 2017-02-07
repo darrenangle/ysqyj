@@ -14,9 +14,8 @@ import GetStarted from '../../ui/pages/onboarding/get-started.jsx';
 
 // Admin Pages & Components
 import AdminStart from '../../ui/pages/admin/admin-start.jsx';
-import AdminResponseIndex from '../../ui/pages/admin/responses/index.jsx';
-import AdminClientResponse from '../../ui/pages/admin/responses/client-response.jsx';
 import ClientStatusList from '../../ui/pages/admin/clients/client-status-list.jsx';
+import AdminClientResponse from '../../ui/pages/admin/responses/admin-client-response-wrapper.jsx';
 
 // Legal Pages
 import DisclaimerWrapper from '../../ui/pages/legal/disclaimer-wrapper.jsx';
@@ -66,7 +65,6 @@ Meteor.startup( () => {
 
         {/* Admin Routes */}
         <Route path='admin' component={ AdminStart } onEnter={ requireAdmin }/>
-        <Route path='/admin/responses' component={ AdminResponseIndex } onEnter={ requireAdmin }/>
         <Route name='clientResponse' path='/admin/responses/:id' component={ AdminClientResponse } onEnter={ requireAdmin }/>
         <Route path='/admin/clients' component={ ClientStatusList } onEnter={ requireAdmin }/>
 

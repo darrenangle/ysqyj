@@ -1,20 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
 import Textarea from 'react-textarea-autosize';
 
 export class PersonalMessage extends Component {
   constructor(props){
     super(props);
     this.state = {
-      message: this.props.response.personalMessage || 'Personal message goes here.'
+      message: this.props.personalMessage || 'Personal message goes here.'
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.updatePMonDoc = _.debounce(this.updatePMonDoc.bind(this), 1000)
   }
 
   updatePMonDoc(){
-    let id = this.props.response._id;
+    let id = this.props.responseId;
     let message = this.state.message;
     Meteor.call(
       'response.updatePersonalMessage',
