@@ -1,28 +1,70 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
-import 'meteor/johndyer:mediaelement';
-
-
+import 'mediaelement/standalone';
+import 'meteor/edgee:slingshot'
 
 
 export class RecapVideo extends Component {
   constructor(props){
     super(props);
-    this.state = {}
+    this.getVideoURLbyID();
+    this.state = {
+      recapVideoId: this.props.videoId || "",
+      recapVideoURL: ""
+    }
+  }
+  componentWillMount(){
+    Slingshot.fileRestrictions("RecapVideo",{
+      allowedFileTypes: ["video/mp4", "video/quicktime"],
+      maxSize: null
+    })
   }
 
   getVideoURLbyID(){
-
+    console.log('getting video URL for '+ this.props.videoId);
+    let t = this;
+    Meteor.call('videos.getVideoURLbyID', this.props.videoId, function(err,res){
+      if (err) { console.log(err) } else {
+        console.log(res);
+        t.setState({recapVideoURL: res});
+      }
+    })
   }
-  uploadVideo(){
 
+  uploadVideo(){
+    let t = this;
+    let metaContext = {
+      clientId: this.props.clientId
+    }
+    let uploader = new Slingshot.Upload("RecapVideo", metaContext);
+    uploader.send(document.getElementById('recapVidInput').files[0], function(error, s3Url){
+      if (error) {
+        console.error('Error uploading', uploader.xhr.response);
+      } else {
+
+        let doc = {
+          url: s3Url,
+          client: t.props.clientId,
+          response: t.props.responseId
+        }
+
+        Meteor.call('videos.uploadNewRecapVideo', doc, function(err,res){
+          if(error){ console.log(error) } else {
+          }
+        })
+
+      }
+    })
   }
 
   renderVideoEl(){
-    let url = this.getVideoURLbyID()
+
     return(
-      <div className='container'>
-        <video></video>
+      <div className='row'>
+        <video
+          className='col-xs-12'
+          src={this.state.recapVideoURL}
+          ></video>
       </div>
     )
   }
@@ -30,6 +72,7 @@ export class RecapVideo extends Component {
     return(
       <div className='container'>
         <h4>No recap video uploaded yet. Upload one below!</h4>
+        <input type="file" id="recapVidInput" onChange={this.uploadVideo.bind(this)} />
       </div>
     )
   }

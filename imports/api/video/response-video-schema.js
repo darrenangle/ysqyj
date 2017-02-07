@@ -61,7 +61,8 @@ ResponseVideoSchema.ResponseVideo = new SimpleSchema({
   videoTitle: {
     type: String,
     label: "Title of The Video",
-    max: 200
+    max: 200,
+    optional: true
   },
   videoDescription: {
     type: String,
@@ -76,11 +77,13 @@ ResponseVideoSchema.ResponseVideo = new SimpleSchema({
   },
   "fileURLs.$.fileType":{
     type: String,
-    max:10
+    max:10,
+    optional:true
   },
   "fileURLs.$.quality":{
     type: String,
-    max:10
+    max:10,
+    optional:true
   },
   "fileURLs.$.url":{
     type: String,
@@ -93,7 +96,8 @@ ResponseVideoSchema.ResponseVideo = new SimpleSchema({
   audioFileURL:{
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    label: "The URL for the audio of this vid"
+    label: "The URL for the audio of this vid",
+    optional: true
   },
   transcriptText: {
     type:String,

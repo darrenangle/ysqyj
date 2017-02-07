@@ -58,7 +58,6 @@ ResponseSchema.Response = new SimpleSchema({
   },
   recapVideoId: {
     type:String,
-    denyUpdate: true,
     regEx: SimpleSchema.RegEx.Id,
     label: "The Id of the Client's Recap video object",
     optional: true
