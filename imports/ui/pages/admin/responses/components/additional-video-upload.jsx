@@ -69,6 +69,7 @@ export class ResponseVideoUploader extends Component {
     this.setState({[stateKey]: event.target.value}, function(){
       console.log(stateKey + ": " + this.state[stateKey]);
     });
+    this.formComplete();
   }
 
   uploadVideo(){
