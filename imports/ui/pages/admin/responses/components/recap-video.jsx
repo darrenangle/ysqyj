@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from 'react';
+import ReactPlayer from 'react-player'
 import { Meteor } from 'meteor/meteor';
-import 'mediaelement/standalone';
 import 'meteor/edgee:slingshot'
 
+// This needs to be refactored into smaller parts
+// Uploading video vs displaying the recap component / player
+// Doin too much right now.
 
 export class RecapVideo extends Component {
   constructor(props){
@@ -47,12 +50,10 @@ export class RecapVideo extends Component {
           client: t.props.clientId,
           response: t.props.responseId
         }
-
         Meteor.call('videos.uploadNewRecapVideo', doc, function(err,res){
           if(error){ console.log(error) } else {
           }
         })
-
       }
     })
   }
@@ -61,10 +62,13 @@ export class RecapVideo extends Component {
 
     return(
       <div className='row'>
-        <video
+        <ReactPlayer
           className='col-xs-12'
-          src={this.state.recapVideoURL}
-          ></video>
+          url={this.state.recapVideoURL}
+          width="100%"
+          height='100%'
+          controls={true}
+        />
       </div>
     )
   }

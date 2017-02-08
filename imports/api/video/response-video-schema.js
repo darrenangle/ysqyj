@@ -70,7 +70,11 @@ ResponseVideoSchema.ResponseVideo = new SimpleSchema({
     optional: true,
     max: 1000
   },
-  fileURLs: {
+  url: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url
+  },
+  additionalfileURLs: {
     type: [Object],
     minCount: 1,
     maxCount: 6

@@ -24,18 +24,23 @@ export class AdminClientResponse extends React.Component {
       let response = this.props.response[0];
       return(
         <div className='container'>
-          <h1>Response for {client.name}</h1>
-          <hr/><br/>
-          <PersonalMessage
-            responseId={response._id}
-            personalMessage={response.personalMessage || 'No Personal Message Yet'}
-          />
-          <hr/><br/>
-          <RecapVideo
-            clientId = {clientId}
-            responseId={response._id}
-            videoId={response.recapVideoId}
-          />
+          <div className='row'>
+            <div className='col-xs-12 col-sm-10 col-sm-offset-1'>
+              <h1>Response for {client.name}</h1>
+              <hr/><br/>
+              <PersonalMessage
+                responseId={response._id}
+                personalMessage={response.personalMessage || 'No Personal Message Yet'}
+              />
+              <hr/><br/>
+              <RecapVideo
+                clientId = {clientId}
+                responseId={response._id}
+                videoId={response.recapVideoId}
+              />
+            </div>
+          </div>
+
         </div>
       )
     }

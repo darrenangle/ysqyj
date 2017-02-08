@@ -10,7 +10,8 @@ export default class GeneralSignUp extends Component {
     this.state = {
       value: '',
       badEmail: false,
-      submitted: false
+      submitted: false,
+      stateField: "juice"
     };
     this.inputChange = this.inputChange.bind(this);
     this.submitEmail = this.submitEmail.bind(this);
@@ -43,6 +44,10 @@ export default class GeneralSignUp extends Component {
   inputChange(event) {
     this.setState({value: event.target.value});
     this.setState({badEmail: false});
+    let stateKey = event.target.name;
+    this.setState({[stateKey]: event.target.value}, function(){
+      console.log(stateKey + ": " + this.state[stateKey]);
+    });
   }
 
   render(){
@@ -58,6 +63,7 @@ export default class GeneralSignUp extends Component {
             onChange={this.inputChange}
             placeholder="Enter your email"
             disabled={this.state.submitted}
+            name="stateField"
           />
           <span className="input-group-btn">
             <button className="btn btn-info" type="button" onClick={this.submitEmail}>Go</button>
