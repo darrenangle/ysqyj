@@ -23,6 +23,7 @@ export class ResponseVideoUploader extends Component {
       transcriptFileURL: "",
       additionalfileURLs: []
     }
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
   componentWillMount(){
     Slingshot.fileRestrictions("ResponseVideo",{
@@ -65,6 +66,8 @@ export class ResponseVideoUploader extends Component {
   }
 
   handleInputChange(event){
+    // Input fields have a 'name' attribute equal to their corresponding state key
+    // so that state key can be passed through the event and set dynamically
     let stateKey = event.target.name;
     this.setState({[stateKey]: event.target.value}, function(){
       console.log(stateKey + ": " + this.state[stateKey]);
@@ -92,10 +95,46 @@ export class ResponseVideoUploader extends Component {
         }
       })
   }
-  render(){
-    <div>
 
-    </div>
+  render(){
+    return(
+      <div className="col-sm-8 video-upload-wrapper">
+        <p className=""> Upload a video for this response: </p>
+        <div className="input-group">
+          <p>Video Title</p>
+            <input type="text"
+              className='form-control'
+              value={this.state.videoTitle}
+              onChange={this.handleInputChange}
+              placeholder="the title of the video"
+              name="videoTitle"
+            /><br/>
+          <p>Video Description: </p>
+            <input type="text" className='form-control'
+              value={this.state.videoDescription}
+              onChange={this.handleInputChange}
+              placeholder="a description of the video"
+              name="videoDescription"
+            /><br/>
+          <p>Response Rank: </p>
+          <input type="number" className='form-control'
+            name="responseRank"
+            min="0" max="25"
+            value={this.state.responseRank}
+            onChange={this.handleInputChange}
+          />
+          <input
+            name="isRecapVideo" className='form-control'
+            id="isRecapVideo"
+            type="checkbox"
+            value="true"
+            onChange={this.handleInputChange}
+          />
+
+        </div>
+      </div>
+    )
+
   }
 
 }

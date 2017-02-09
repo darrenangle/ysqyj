@@ -7,6 +7,7 @@ import { Responses } from '../../../../../imports/api/responses/response-schema.
 // Client Response (Admin View) Components
 import { PersonalMessage } from './components/personal-message.jsx';
 import { RecapVideo } from './components/recap-video.jsx';
+import { ResponseVideoUploader } from './components/additional-video-upload.jsx';
 
 // Styles
 import './pm.scss';
@@ -38,6 +39,10 @@ export class AdminClientResponse extends React.Component {
                 responseId={response._id}
                 videoId={response.recapVideoId}
               />
+            <ResponseVideoUploader
+              clientId = {clientId}
+              responseId={response._id}
+            />
             </div>
           </div>
 

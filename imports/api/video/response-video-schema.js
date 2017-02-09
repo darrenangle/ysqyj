@@ -77,7 +77,8 @@ ResponseVideoSchema.ResponseVideo = new SimpleSchema({
   additionalfileURLs: {
     type: [Object],
     minCount: 1,
-    maxCount: 6
+    maxCount: 6,
+    optional: true
   },
   "fileURLs.$.fileType":{
     type: String,
@@ -91,7 +92,8 @@ ResponseVideoSchema.ResponseVideo = new SimpleSchema({
   },
   "fileURLs.$.url":{
     type: String,
-    regEx: SimpleSchema.RegEx.Url
+    regEx: SimpleSchema.RegEx.Url,
+    optional:true
   },
   hasTranscript:{
     type: Boolean,
