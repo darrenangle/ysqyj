@@ -132,7 +132,7 @@ export class ResponseVideoUploader extends Component {
             type="checkbox"
             value={this.state.isRecapVideo}
             onChange={(e)=>{
-              let bool = this.state.isRecapVideo == true ? false : true;
+              let bool = !this.state.isRecapVideo;
               let fakeevent = {
                 target: {
                   name: "isRecapVideo",
@@ -140,7 +140,6 @@ export class ResponseVideoUploader extends Component {
                 }
               }
               this.setState({isRecapVideo: bool}, function(){
-                console.log(this.state.isRecapVideo);
                 this.handleInputChange(fakeevent);
               });
             }}
