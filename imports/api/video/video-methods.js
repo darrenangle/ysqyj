@@ -6,44 +6,32 @@ import { ResponseVideos } from './response-video-schema.js'
 import { Responses } from '../responses/response-schema.js';
 
 Meteor.methods({
-  'videos.getVideoURLbyID'(videoId){
+  'videos.deleteRecapVideo'(videoId,responseId){
     if(!isAdmin(this.userId)){
-      console.log('You aren\'t supposed to do that!')
+      throw new Meteor.Error(403, "Access denied")
     } else {
-      let response = ResponseVideos.find({_id: videoId}, { fields: { fileURLs: 1 } }).fetch();
-      return response[0].fileURLs[0].url;
+        return {
+          delete: ResponseVideos.deleteOne({_id: videoId}),
+          update: Responses.update({_id: responseId}, {$set: { recapVideoId: "" } })
+        }
     }
   },
-  'videos.uploadNewRecapVideo'(doc){
+
+  'videos.uploadResponseVideo'(doc){
     // check if requester is admin
-    check(doc.url, String);
     if(!isAdmin(this.userId)){
-      console.log('You aren\'t supposed to do that!')
+      throw new Meteor.Error(403, "Access denied")
     } else {
-
-      let video = {
-        fileType: "default",
-        quality: "default",
-        url: doc.url
-      }
-      let responseVideoDoc = {
-        owner: doc.client,
-        responseId: doc.response,
-        isRecapVideo: true,
-        fileURLs: [ video ],
-        hasTranscript: false,
-        createdAt: new Date()
-      }
-
       // Create new video doc with URL
-      ResponseVideos.insert(responseVideoDoc, function(error, newId){
+      ResponseVideos.insert(doc, function(error, newId){
         if(error){ console.log(error )} else {
-          // Add video ID to response doc
-          Responses.update({_id: doc.response}, { $set: { recapVideoId: newId} }, function(error){
-            if (error) console.log(error)
-          })
-        }
-
+          // Add video ID to response doc if recap video
+          if (doc.isRecapVideo){
+            Responses.update({_id: doc.responseId}, { $set: { recapVideoId: newId} }, function(error){
+              if (error) console.log(error)
+            })
+          }
+      }
       }) //End ResponseVideos insert
     } // end isAdmin check
   }

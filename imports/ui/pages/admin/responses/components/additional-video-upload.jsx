@@ -24,6 +24,9 @@ export class ResponseVideoUploader extends Component {
       additionalfileURLs: []
     }
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.formComplete = this.formComplete.bind(this);
+    this.saveVideoDocToDB = this.saveVideoDocToDB.bind(this);
+    this.uploadVideo = this.uploadVideo.bind(this);
   }
   componentWillMount(){
     Slingshot.fileRestrictions("ResponseVideo",{
@@ -39,15 +42,16 @@ export class ResponseVideoUploader extends Component {
           !this.state.videoDescription )
       {
           this.setState({formComplete:false})
-      }
-
-    if( this.state.isRecapVideo == false && this.state.responseRank < 1 ){
+      } else if( this.state.isRecapVideo == false && this.state.responseRank < 1 ){
         this.setState({formComplete:false})
+    } else {
+      this.setState({formComplete:true})
     }
-    this.setState({formComplete:true})
+
   }
 
   saveVideoDocToDB(){
+
     // Video file uploaded, form complete, now upload to app database
     let doc = {
       owner: this.state.owner,
@@ -60,8 +64,17 @@ export class ResponseVideoUploader extends Component {
       url: this.state.url,
       audioFileURL: this.state.audioFileURL,
       transcriptText: this.state.transcriptText,
-      transcriptFileURL: this.state.transcriptFileURL
+      transcriptFileURL: this.state.transcriptFileURL,
+      createdAt: new Date()
     }
+
+    var t = this;
+    Meteor.call('videos.uploadResponseVideo', doc, function(err,res){
+      if(err){ console.log(error) } else {
+        console.log(res);
+        t.setState(t.getInitialState());
+      }
+    })
 
   }
 
@@ -72,17 +85,16 @@ export class ResponseVideoUploader extends Component {
     this.setState({[stateKey]: event.target.value}, function(){
       console.log(stateKey + ": " + this.state[stateKey]);
     });
-    this.formComplete();
   }
 
   uploadVideo(){
     let t = this;
     // Upload info is Slingshot's 'metaContext' field renamed for clarity
     // use this object to pass fields into the S3 file paths in the slingshot Rule
-    let uploadInfo = {
-      clientId: this.state.clientId
+    let metaContext = {
+      clientId: this.state.owner
     }
-    let uploader = new Slingshot.Upload("ResponseVideo", uploadInfo);
+    let uploader = new Slingshot.Upload("ResponseVideo", metaContext);
     // Send the upload to S3 via slingshot
     uploader.send(
       document.getElementById('response-video-input').files[0],
@@ -92,6 +104,7 @@ export class ResponseVideoUploader extends Component {
         } else {
           // File upload successful, S3 URL in fileURL variable
           t.setState({url: fileURL})
+          console.log(fileURL);
         }
       })
   }
@@ -126,12 +139,13 @@ export class ResponseVideoUploader extends Component {
             value={this.state.responseRank}
             onChange={this.handleInputChange}
           />
+        <label>This is a recap video
           <input
             name="isRecapVideo" className='form-control'
             id="isRecapVideo"
             type="checkbox"
             value={this.state.isRecapVideo}
-            onChange={(e)=>{
+            onChange={ (e) => {
               let bool = !this.state.isRecapVideo;
               let fakeevent = {
                 target: {
@@ -144,8 +158,12 @@ export class ResponseVideoUploader extends Component {
               });
             }}
           />
-
-        </div>
+         </label>
+         <p>Upload video file: </p>
+        <input className='form-control' type="file" id="response-video-input" onChange={this.uploadVideo} />
+        </div><br/>
+      <button type = "button" className= "btn btn-primary" onClick={this.saveVideoDocToDB}>Upload Video Doc</button>
+        <br/>
       </div>
     )
 
