@@ -97,6 +97,9 @@ export class ResponseVideoUploader extends Component {
   }
 
   render(){
+
+    let recapBool = false;
+
     return(
       <div className="col-sm-8 video-upload-wrapper">
         <p className=""> Upload a video for this response: </p>
@@ -127,8 +130,20 @@ export class ResponseVideoUploader extends Component {
             name="isRecapVideo" className='form-control'
             id="isRecapVideo"
             type="checkbox"
-            value="true"
-            onChange={this.handleInputChange}
+            value={this.state.isRecapVideo}
+            onChange={(e)=>{
+              let bool = this.state.isRecapVideo == true ? false : true;
+              let fakeevent = {
+                target: {
+                  name: "isRecapVideo",
+                  value: bool
+                }
+              }
+              this.setState({isRecapVideo: bool}, function(){
+                console.log(this.state.isRecapVideo);
+                this.handleInputChange(fakeevent);
+              });
+            }}
           />
 
         </div>
