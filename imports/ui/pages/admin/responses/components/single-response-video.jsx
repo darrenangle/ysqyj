@@ -27,8 +27,8 @@ export class SingleResponseVideo extends Component {
           />
         </div>
         <div className='col-xs-12 col-sm-6'>
-          <h4>{this.props.video.responseRank}. {this.props.video.videoTitle}</h4>
-          <p>{this.props.video.description}</p>
+          <h3>{this.props.video.responseRank}. {this.props.video.videoTitle}</h3>
+          <p>{this.props.video.videoDescription}</p>
       </div>
 
 
