@@ -27,7 +27,20 @@ export class ResponseVideoUploader extends Component {
     this.formComplete = this.formComplete.bind(this);
     this.saveVideoDocToDB = this.saveVideoDocToDB.bind(this);
     this.uploadVideo = this.uploadVideo.bind(this);
+    this.resetState = this.resetState.bind(this);
   }
+
+  resetState(){
+    this.setState({
+      {
+        formComplete: false, owner: this.props.clientId, responseId: this.props.responseId,
+        url: "", isRecapVideo: false, responseRank: 0,videoTitle: "",
+        videoDescription: "", hasTranscript: false, transcriptText: "",
+        transcriptFileURL: "", additionalfileURLs: []
+      }
+    })
+  }
+
   componentWillMount(){
     Slingshot.fileRestrictions("ResponseVideo",{
       allowedFileTypes: ["video/mp4", "video/quicktime"],
@@ -35,23 +48,7 @@ export class ResponseVideoUploader extends Component {
     })
   }
 
-  formComplete(){
-    // Check required fields, set formComplete state field
-    if(   !this.state.url ||
-          !this.state.videoTitle ||
-          !this.state.videoDescription )
-      {
-          this.setState({formComplete:false})
-      } else if( this.state.isRecapVideo == false && this.state.responseRank < 1 ){
-        this.setState({formComplete:false})
-    } else {
-      this.setState({formComplete:true})
-    }
-
-  }
-
   saveVideoDocToDB(){
-
     // Video file uploaded, form complete, now upload to app database
     let doc = {
       owner: this.state.owner,
@@ -72,14 +69,14 @@ export class ResponseVideoUploader extends Component {
     Meteor.call('videos.uploadResponseVideo', doc, function(err,res){
       if(err){ console.log(error) } else {
         console.log(res);
-        t.setState(t.getInitialState());
+        t.resetState();
       }
     })
 
   }
 
   handleInputChange(event){
-    // Input fields have a 'name' attribute equal to their corresponding state key
+    // Input fields for this form have a 'name' attribute equal to their corresponding state key
     // so that state key can be passed through the event and set dynamically
     let stateKey = event.target.name;
     this.setState({[stateKey]: event.target.value}, function(){
@@ -146,6 +143,8 @@ export class ResponseVideoUploader extends Component {
             type="checkbox"
             value={this.state.isRecapVideo}
             onChange={ (e) => {
+              // This is some nonsense I had to do to tie a Boolean
+              // To a checkbox
               let bool = !this.state.isRecapVideo;
               let fakeevent = {
                 target: {
