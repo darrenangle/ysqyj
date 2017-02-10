@@ -38,6 +38,8 @@ export class ResponseVideoUploader extends Component {
         transcriptFileURL: "", additionalfileURLs: []
       }
     )
+    document.getElementById('response-video-input').value='';
+
   }
 
   componentWillMount(){

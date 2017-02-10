@@ -74,6 +74,10 @@ ResponseVideoSchema.ResponseVideo = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Url
   },
+  cdnUrl:{
+    type: String,
+    regEx: SimpleSchema.RegEx.Url
+  },
   additionalfileURLs: {
     type: [Object],
     minCount: 1,
