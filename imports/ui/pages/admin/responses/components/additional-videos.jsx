@@ -26,7 +26,7 @@ export class AdditionalVideosWrapper extends Component {
 
   render(){
     return(
-      <div className='additional-videos-wrapper'>
+      <div className='additional-videos-wrapper col-xs-12'>
         {this.renderVideos()}
       </div>
     )

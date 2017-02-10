@@ -43,14 +43,14 @@ export class AdminClientResponse extends React.Component {
               clientId = {clientId}
               responseId={response._id}
             />
+
+            </div>
+          </div>
           <AdditionalVideosWrapper
             videos={this.props.videos}
             responseId={response._id}
             clientId={clientId}
           />
-            </div>
-          </div>
-
         </div>
       )
     }
