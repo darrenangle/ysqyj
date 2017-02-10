@@ -9,7 +9,7 @@ import { ResponseVideos } from '../../../../../imports/api/video/response-video-
 import { PersonalMessage } from './components/personal-message.jsx';
 import { RecapVideo } from './components/recap-video.jsx';
 import { ResponseVideoUploader } from './components/additional-video-upload.jsx';
-
+import { AdditionalVideosWrapper } from './components/additional-videos.jsx';
 // Styles
 import './pm.scss';
 
@@ -43,6 +43,11 @@ export class AdminClientResponse extends React.Component {
               clientId = {clientId}
               responseId={response._id}
             />
+          <AdditionalVideosWrapper
+            videos={this.props.videos}
+            responseId={response._id}
+            clientId={clientId}
+          />
             </div>
           </div>
 

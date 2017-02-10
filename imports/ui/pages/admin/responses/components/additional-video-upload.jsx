@@ -24,21 +24,20 @@ export class ResponseVideoUploader extends Component {
       additionalfileURLs: []
     }
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.formComplete = this.formComplete.bind(this);
     this.saveVideoDocToDB = this.saveVideoDocToDB.bind(this);
     this.uploadVideo = this.uploadVideo.bind(this);
     this.resetState = this.resetState.bind(this);
   }
 
   resetState(){
-    this.setState({
+    this.setState(
       {
         formComplete: false, owner: this.props.clientId, responseId: this.props.responseId,
         url: "", isRecapVideo: false, responseRank: 0,videoTitle: "",
         videoDescription: "", hasTranscript: false, transcriptText: "",
         transcriptFileURL: "", additionalfileURLs: []
       }
-    })
+    )
   }
 
   componentWillMount(){
