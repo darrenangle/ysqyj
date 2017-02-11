@@ -1,9 +1,8 @@
 import React from 'react';
-import { Navigation } from '../components/nav.jsx';
 
 export const App = ( { children } ) => (
   <div>
-    <Navigation />
+
 
     {/*
       // children obj passed here allows for router to share current routes components
