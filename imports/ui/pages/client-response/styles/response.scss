@@ -1,0 +1,30 @@
+.personal-message-input {
+  width: 100%;
+  border: none;
+  font-size: 20px;
+  outline: none;
+  resize: none;
+}
+
+.recap-video-wrapper {
+  h2 {
+    font-size: 30px;
+    color: #ff9919;
+    margin-bottom: 20px;
+  }
+  h4 {
+    line-height: 1.5;
+  }
+}
+
+.full-width-video-wrapper{
+  border: 1px solid #c5c5c5;
+  border-radius: 5px;
+  min-height: 50px;
+  margin-bottom: 25px;
+}
+
+.single-response-video-wrapper{
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
