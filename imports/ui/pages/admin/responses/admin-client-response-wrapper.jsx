@@ -31,6 +31,11 @@ export class AdminClientResponse extends React.Component {
             <div className='col-xs-12 col-sm-10 col-sm-offset-1'>
               <h1>Response for {client.name}</h1>
               <hr/><br/>
+                <ResponseVideoUploader
+                  clientId = {clientId}
+                  responseId={response._id}
+                />
+              <br/><hr/><br/>
               <PersonalMessage
                 responseId={response._id}
                 personalMessage={response.personalMessage || 'No Personal Message Yet'}
@@ -39,11 +44,6 @@ export class AdminClientResponse extends React.Component {
               <RecapVideo
                 url={recapvid.url}
               />
-            <ResponseVideoUploader
-              clientId = {clientId}
-              responseId={response._id}
-            />
-
             </div>
           </div>
           <AdditionalVideosWrapper
