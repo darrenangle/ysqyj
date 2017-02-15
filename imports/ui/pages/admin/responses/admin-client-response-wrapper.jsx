@@ -10,6 +10,7 @@ import { PersonalMessage } from './components/personal-message.jsx';
 import { RecapVideo } from './components/recap-video.jsx';
 import { ResponseVideoUploader } from './components/additional-video-upload.jsx';
 import { AdditionalVideosWrapper } from './components/additional-videos.jsx';
+
 // Styles
 import './pm.scss';
 
@@ -74,7 +75,7 @@ export default createContainer( ({ params }) => {
   const responseSub = Meteor.subscribe('responseByClientId', clientId);
   const videosSub = Meteor.subscribe('videosByOwner', clientId);
 
-  const loading = !userSub.ready() || !responseSub.ready();
+  const loading = !videosSub.ready() || !userSub.ready() || !responseSub.ready();
   return {
     client: Meteor.users.find(clientId).fetch(),
     response: Responses.find({owner:clientId}).fetch(),

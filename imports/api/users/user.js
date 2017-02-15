@@ -113,11 +113,11 @@ UserSchema.User = new SimpleSchema({
         // Roles.addUsersToRoles(userId, ["admin"], Roles.GLOBAL_GROUP);
         // You can't mix and match adding with and without a group since
         // you will fail validation in some cases.
-        roles: {
-            type: Object,
-            optional: true,
-            blackbox: true
-        },
+    roles: {
+       type: [String],
+       blackbox: true,
+       optional: true
+   },
     // In order to avoid an 'Exception in setInterval callback' from Meteor
     heartbeat: {
         type: Date,
