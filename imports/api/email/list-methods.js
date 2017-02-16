@@ -28,3 +28,17 @@ Meteor.methods({
 
   }
 })
+
+// Rate limit methods
+
+if (Meteor.isServer) {
+  import { rateLimit } from '../../startup/server/security/rate-limit-methods.js';
+
+  rateLimit({
+    methods: [
+      'addEmailtoGeneralList',
+    ],
+    limit: 1,
+    timeRange: 1000,
+  });
+}
