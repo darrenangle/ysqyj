@@ -5,7 +5,7 @@ export default class HomePageLanding extends Component {
   render(){
     return(
       <div className='container'>
-        <div className='col-sm-6 col-md-offset-3 margin-top-100'>
+        <div className='col-md-6 col-md-offset-3 margin-top-100'>
           <h1>You Should Quit Your Job</h1>
           <hr/>
           <br/>
