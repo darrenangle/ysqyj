@@ -11,4 +11,9 @@ if (Meteor.isServer){
     }
     return Responses.find({ owner: clientId})
   });
+  Meteor.publish('currentUserResponse', function currentUserResponse(){
+      let currentUser = this.userId;
+      console.log(currentUser);
+      return Responses.find({ owner: currentUser});
+  });
 }

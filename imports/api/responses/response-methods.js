@@ -22,7 +22,8 @@ Meteor.methods({
     if(isAdmin(this.userId)){
       return Responses.insert({
         owner: clientId,
-        createdAt: new Date()
+        createdAt: new Date(),
+        responseComplete: false
       })
     } else {
       return 'not-authorized'

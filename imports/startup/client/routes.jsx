@@ -11,6 +11,7 @@ import HomePageLanding from '../../ui/pages/landing/homepage-wrapper.jsx';
 // User Account MGMT Routes
 import QuickLogin from '../../ui/pages/login.jsx';
 import GetStarted from '../../ui/pages/onboarding/get-started.jsx';
+import ClientResponse  from '../../ui/pages/client-response/client-response-wrapper.jsx';
 
 // Admin Pages & Components
 import AdminStart from '../../ui/pages/admin/admin-start.jsx';
@@ -60,6 +61,7 @@ Meteor.startup( () => {
         {/* User Routes*/}
         <Route path='/login' component={QuickLogin} />
         <Route path='/get-started' component={GetStarted} />
+        <Route path='/my-response' component={ ClientResponse } />
         {/*<Route path='/responses/:id' component={ AdminClientResponse } onEnter={ requireOwner }/> */}
 
 

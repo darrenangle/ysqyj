@@ -14,9 +14,6 @@ if (Meteor.isServer){
 
   Meteor.publish('singleUserById', function singleUserPublication(clientId){
     let currentUser = this.userId;
-    if (!currentUser || !Roles.userIsInRole(currentUser, adminRole)) {
-          throw new Meteor.Error(403, "Access denied")
-    }
     return Meteor.users.find(clientId)
   });
 }

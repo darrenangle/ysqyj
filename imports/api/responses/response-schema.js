@@ -70,7 +70,11 @@ ResponseSchema.Response = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Id,
     label: "The id of the additional response videos"
+  },
+  responseComplete: {
+    type: Boolean
   }
+
 
 })
 
