@@ -10,6 +10,7 @@ import { PersonalMessage } from './components/personal-message.jsx';
 import { RecapVideo } from './components/recap-video.jsx';
 import { ResponseVideoUploader } from './components/additional-video-upload.jsx';
 import { AdditionalVideosWrapper } from './components/additional-videos.jsx';
+import { MarkResponseAsReady } from './components/mark-ready.jsx';
 
 // Styles
 import './pm.scss';
@@ -31,6 +32,11 @@ export class AdminClientResponse extends React.Component {
           <div className='row'>
             <div className='col-xs-12 col-sm-10 col-sm-offset-1'>
               <h1>Response for {client.name}</h1>
+
+              <MarkResponseAsReady
+                responseId={response._id}
+              />
+
               <hr/><br/>
                 <ResponseVideoUploader
                   clientId = {clientId}

@@ -26,12 +26,8 @@ export class ClientResponse extends Component {
 
   renderNoResponse(){
     return(
-      <div className='container'>
-        <div className='row'>
-          <div className='col-xs-12 col-sm-10 col-sm-offset-1'>
+      <div className='response-not-ready'>
             <h1>Your response will be ready soon!</h1>
-          </div>
-        </div>
       </div>
     )
   }

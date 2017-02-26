@@ -56,13 +56,9 @@ less@2.6.5
 livedata@1.0.18
 localstorage@1.0.12
 logging@1.1.16
-lookback:emails@0.7.7
-lookback:html-to-text@2.1.3_2
 mdg:validation-error@0.2.0
 meteor@1.6.0
 meteor-base@1.0.4
-meteorhacks:picker@1.0.3
-meteorhacks:ssr@2.2.0
 minifier-css@1.2.15
 minifier-js@1.2.15
 minimongo@1.0.19
@@ -91,7 +87,6 @@ reactive-var@1.0.11
 reload@1.1.11
 retry@1.0.9
 routepolicy@1.0.12
-sacha:juice@0.1.4
 service-configuration@1.0.11
 session@1.1.7
 sha@1.0.9
