@@ -5,6 +5,8 @@ import { isAdmin } from '../security/security.js';
 import { ResponseVideos } from './response-video-schema.js'
 import { Responses } from '../responses/response-schema.js';
 
+const cdn = Meteor.settings.private.cdn;
+
 Meteor.methods({
   'videos.deleteRecapVideo'(videoId,responseId){
     if(!isAdmin(this.userId)){
@@ -23,7 +25,10 @@ Meteor.methods({
       throw new Meteor.Error(403, "Access denied")
     } else {
       // Create new video doc with URL
-      ResponseVideos.insert(doc, function(error, newId){
+      let moddedDoc = doc;
+      moddedDoc.cdnUrl = cdn + doc.url.substring(doc.url.indexOf('/', 8));
+
+      ResponseVideos.insert(moddedDoc, function(error, newId){
         if(error){ console.log(error )} else {
           // Add video ID to response doc if recap video
           if (doc.isRecapVideo){

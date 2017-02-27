@@ -15,7 +15,7 @@ export class RecapVideo extends Component {
   }
 
   renderVideoEl(){
-
+      console.log("URL: " + this.props.url);
     return(
       <div className='row'>
         <ReactPlayer

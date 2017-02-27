@@ -12,7 +12,6 @@ export class AdditionalVideosWrapper extends Component {
 
   renderVideos(){
     let videos = this.props.videos;
-    console.log(videos);
     return videos.map((video) => {
       return(
         <SingleResponseVideo

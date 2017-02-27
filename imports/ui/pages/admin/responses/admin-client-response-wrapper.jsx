@@ -10,7 +10,7 @@ import { PersonalMessage } from './components/personal-message.jsx';
 import { RecapVideo } from './components/recap-video.jsx';
 import { ResponseVideoUploader } from './components/additional-video-upload.jsx';
 import { AdditionalVideosWrapper } from './components/additional-videos.jsx';
-import { MarkResponseAsReady } from './components/mark-ready.jsx';
+import { ResponseStatusBlock } from './components/response-status-block.jsx';
 
 // Styles
 import './pm.scss';
@@ -26,22 +26,25 @@ export class AdminClientResponse extends React.Component {
       let clientId = this.props.params.id;
       let client = this.props.client[0];
       let response = this.props.response[0];
-      let recapvid = this.props.recapVideo[0] || {url: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'} ;
+      let recapvid = this.props.recapVideo[0] || {cdnUrl:'http://techslides.com/demos/sample-videos/small.webm'};
+      let additionalVideos = this.props.videos;
       return(
         <div className='container'>
           <div className='row'>
             <div className='col-xs-12 col-sm-10 col-sm-offset-1'>
-              <h1>Response for {client.name}</h1>
-
-              <MarkResponseAsReady
-                responseId={response._id}
+              <ResponseStatusBlock
+                response = {response}
+                client = {client}
+                videos = {additionalVideos}
               />
-
-              <hr/><br/>
+            <br/><hr/><br/>
                 <ResponseVideoUploader
                   clientId = {clientId}
                   responseId={response._id}
                 />
+              <h1>Preview Response For {client.name || client.emails[0].address}</h1>
+
+
               <br/><hr/><br/>
               <PersonalMessage
                 responseId={response._id}
@@ -49,12 +52,12 @@ export class AdminClientResponse extends React.Component {
               />
               <hr/><br/>
               <RecapVideo
-                url={recapvid.url}
+                url={recapvid.cdnUrl}
               />
             </div>
           </div>
           <AdditionalVideosWrapper
-            videos={this.props.videos}
+            videos={additionalVideos}
             responseId={response._id}
             clientId={clientId}
           />

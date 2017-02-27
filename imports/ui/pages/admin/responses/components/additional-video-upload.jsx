@@ -65,6 +65,7 @@ export class ResponseVideoUploader extends Component {
       transcriptFileURL: this.state.transcriptFileURL,
       createdAt: new Date()
     }
+    console.log(doc);
 
     var t = this;
     Meteor.call('videos.uploadResponseVideo', doc, function(err,res){
@@ -101,7 +102,10 @@ export class ResponseVideoUploader extends Component {
           console.error('Error uploading', uploader.xhr.response);
         } else {
           // File upload successful, S3 URL in fileURL variable
-          t.setState({url: fileURL})
+          t.setState({url: fileURL}, function(){
+            console.log(t.state.url);
+          })
+
           console.log(fileURL);
         }
       })
@@ -112,8 +116,8 @@ export class ResponseVideoUploader extends Component {
     let recapBool = false;
 
     return(
-      <div className="col-sm-8 video-upload-wrapper">
-        <p className=""> Upload a video for this response: </p>
+      <div className="col-sm-12 video-upload-wrapper">
+        <h3 className=""> Upload a video for this response: </h3>
         <div className="input-group">
           <p>Video Title</p>
             <input type="text"
