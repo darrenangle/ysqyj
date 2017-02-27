@@ -14,7 +14,7 @@ Meteor.methods({
         return false;
       }
     } else {
-      return 'not-authorized'
+      return 'response exists: not-authorized'
     }
   },
   'response.createResponseDoc'(clientId){
@@ -26,7 +26,7 @@ Meteor.methods({
         responseComplete: false
       })
     } else {
-      return 'not-authorized'
+      return 'create response not-authorized'
     }
   },
   'response.updatePersonalMessage'(responseId,newPersonalMessage){

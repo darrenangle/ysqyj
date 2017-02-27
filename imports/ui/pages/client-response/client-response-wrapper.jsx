@@ -70,8 +70,9 @@ export class ClientResponse extends Component {
   }
 
   render(){
-    return  this.props.loading ? <div>Loading..</div>                       :
-            this.props.response[0].responseComplete ?  this.renderResponse()   :
+    return  this.props.loading  ? <div>Loading..</div> :
+            this.props.response ? this.renderNoResponse()  :
+            this.props.response[0].responseComplete ?  this.renderResponse() :
                                                     this.renderNoResponse() ;
   }
 }
@@ -86,7 +87,7 @@ ClientResponse.propTypes = {
 export default ClientResponseContainer = createContainer( ({ params }) => {
   let clientId = Meteor.userId();
   const userSub = Meteor.subscribe('singleUserById', clientId);
-  const responseSub = Meteor.subscribe('responseByClientId', clientId);
+  const responseSub = Meteor.subscribe('currentUserResponse');
   const videosSub = Meteor.subscribe('videosByOwner', clientId);
 
   const loading = !videosSub.ready() || !userSub.ready() || !responseSub.ready();
