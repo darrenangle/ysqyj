@@ -64,9 +64,6 @@ export class ClientResponse extends Component {
       </div>
     )
 
-
-
-
   }
 
   render(){

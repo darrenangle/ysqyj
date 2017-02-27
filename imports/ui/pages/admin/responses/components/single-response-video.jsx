@@ -20,7 +20,7 @@ export class SingleResponseVideo extends Component {
         <div className='col-xs-12 col-sm-6'>
           <ReactPlayer
             className=''
-            url={this.props.video.url}
+            url={this.props.video.cdnUrl}
             width="100%"
             height='100%'
             controls={true}
