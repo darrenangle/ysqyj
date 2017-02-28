@@ -37,7 +37,6 @@ export class ResponseLogin extends Component {
   handleInputChange(event){
     let stateKey = event.target.name;
     this.setState({[stateKey]: event.target.value}, function(){
-      console.log(stateKey + ": " + this.state[stateKey]);
     });
   }
 

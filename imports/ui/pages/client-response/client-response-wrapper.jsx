@@ -44,7 +44,7 @@ export class ClientResponse extends Component {
     let recapvid = this.props.recapVideo[0] || {cdnUrl:'http://techslides.com/demos/sample-videos/small.webm'};
     let additionalVideos = this.props.videos;
 
-    if(!response.responseComplete){
+    if(!response || !response.responseComplete){
       return(
         <div className='response-not-ready'>
               <h1>Your response will be ready soon!</h1>
@@ -61,6 +61,7 @@ export class ClientResponse extends Component {
             <PersonalMessage
               responseId={response._id}
               personalMessage={response.personalMessage || 'No Personal Message Yet'}
+              disabled={true}
             />
             <hr/><br/>
               <RecapVideo
