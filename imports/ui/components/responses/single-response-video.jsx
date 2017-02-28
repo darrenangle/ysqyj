@@ -6,12 +6,23 @@ export class SingleResponseVideo extends Component {
   constructor(props){
     super(props);
     this.state = {
-      url: ""
+      url: "",
+      audioFileURL: ""
     }
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.getSignedUrl();
+    this.getSignedAudioUrl();
+  }
+
+  getSignedAudioUrl(){
+    var t = this;
+    Meteor.call('getSignedUrl.clientResponseVideo', this.props.video.audioFileURL, Meteor.userId(), function(error, signedUrl){
+      if (error) {console.log(error)} else {
+        t.setState({audioFileURL: signedUrl})
+      }
+    })
   }
 
   getSignedUrl(){
@@ -41,9 +52,17 @@ export class SingleResponseVideo extends Component {
         <div className='col-xs-12 col-sm-6'>
           <h3>{this.props.video.responseRank}. {this.props.video.videoTitle}</h3>
           <p>{this.props.video.videoDescription}</p>
-      </div>
-
-
+          {this.props.video.videoHomework?
+            <p><strong>Homework:<br/></strong>{this.props.video.videoHomework}</p>
+            : <span></span>
+          }
+          {this.props.video.audioFileURL?
+            <div>
+              <a href={this.state.audioFileURL} download>Download Audio</a>
+            </div>
+          : <span></span>
+          }
+        </div>
       </div>
     )
   }

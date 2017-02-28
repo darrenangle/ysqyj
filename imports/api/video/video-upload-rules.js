@@ -27,6 +27,6 @@ Slingshot.createDirective("ResponseVideo", Slingshot.S3Storage, {
     }
   },
   key: function(file, metaContext){
-    return "users/" + metaContext.clientId + "/response-videos/" + Date.now() + "-" + file.name;
+    return "users/" + metaContext.clientId + "/response-media/" + Date.now() + "-" + file.name;
   }
 })

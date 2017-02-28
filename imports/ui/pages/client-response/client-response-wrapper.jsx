@@ -9,19 +9,23 @@ import { ResponseVideos } from '../../../../imports/api/video/response-video-sch
 
 
 // Components
-import { PersonalMessage } from './components/personal-message.jsx';
-import { RecapVideo } from './components/recap-video.jsx';
-import { ResponseVideoWrapper } from './components/response-video-wrapper.jsx';
-import { Downloads } from './components/downloads.jsx';
-
-import './styles/response.scss';
+import { PersonalMessage } from '../../components/responses/personal-message.jsx';
+import { RecapVideo } from '../../components/responses/recap-video.jsx';
+import { AdditionalVideosWrapper } from '../../components/responses/additional-videos.jsx';
+import { ResponseLogin } from '../../components/responses/response-login.jsx';
+import '../../components/responses/pm.scss';
 
 export class ClientResponse extends Component {
   constructor(props){
     super(props);
     this.state = {
+      response: "",
 
     }
+  }
+
+  componentWillMount(){
+
   }
 
   renderNoResponse(){
@@ -35,10 +39,18 @@ export class ClientResponse extends Component {
   renderResponse(){
 
     let clientId = Meteor.userId();
-    console.log(this.props);
     let client = this.props.client[0];
     let response = this.props.response[0];
-    let recapvid = this.props.recapVideo[0] || {url: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'};
+    let recapvid = this.props.recapVideo[0] || {cdnUrl:'http://techslides.com/demos/sample-videos/small.webm'};
+    let additionalVideos = this.props.videos;
+
+    if(!response.responseComplete){
+      return(
+        <div className='response-not-ready'>
+              <h1>Your response will be ready soon!</h1>
+        </div>
+      )
+    }
 
     return(
       <div className='container'>
@@ -51,13 +63,13 @@ export class ClientResponse extends Component {
               personalMessage={response.personalMessage || 'No Personal Message Yet'}
             />
             <hr/><br/>
-            <RecapVideo
-              url={recapvid.url}
-            />
+              <RecapVideo
+                url={recapvid.cdnUrl}
+              />
           </div>
         </div>
-        <ResponseVideoWrapper
-          videos={this.props.videos}
+        <AdditionalVideosWrapper
+          videos={additionalVideos}
           responseId={response._id}
           clientId={clientId}
         />
@@ -67,10 +79,12 @@ export class ClientResponse extends Component {
   }
 
   render(){
-    return  this.props.loading  ? <div>Loading..</div> :
-            this.props.response ? this.renderNoResponse()  :
-            this.props.response[0].responseComplete ?  this.renderResponse() :
-                                                    this.renderNoResponse() ;
+    if(Meteor.user()){
+      return  this.props.loading  ? <div>Loading..</div> : this.renderResponse()
+    } else {
+      return (<ResponseLogin/>)
+    }
+
   }
 }
 

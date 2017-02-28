@@ -7,10 +7,16 @@ export class ResponseStatusBlock extends Component {
     this.state = {
       responseComplete: this.props.response.responseComplete
     }
+    this.toggleReady = this.toggleReady.bind(this);
   }
 
-  markAsReady(){
-
+  toggleReady(){
+    let newReadyState = !this.props.response.responseComplete;
+    Meteor.call('response.toggleReady', this.props.response._id, newReadyState, (err,res)=>{
+      if(err){ console.log(err)} else {
+        // console.log(res)
+      }
+    });
   }
 
   render(){
@@ -26,7 +32,7 @@ export class ResponseStatusBlock extends Component {
         <p>Other Videos Uploaded? <strong>{this.props.videos.length[0] ? "At least one video uploaded" : "No Videos Yet"} </strong></p>
         <p>Personal Message Written? <strong>{this.props.response.personalMessage ? "Personal Message Edited" : "No Personal Message Yet"} </strong></p>
         <br/>
-        <button type="button" className="btn btn-success">
+        <button onClick={this.toggleReady} type="button" className="btn btn-success">
           Send Response to {this.props.client.name || this.props.client.emails[0].address}
         </button>
 

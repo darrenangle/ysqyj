@@ -70,6 +70,12 @@ ResponseVideoSchema.ResponseVideo = new SimpleSchema({
     optional: true,
     max: 1000
   },
+  videoHomework: {
+    type: String,
+    label: "Any Homework assignments related to video",
+    optional: true,
+    max: 1000
+  },
   url: {
     type: String,
     regEx: SimpleSchema.RegEx.Url

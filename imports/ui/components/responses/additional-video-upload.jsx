@@ -18,6 +18,7 @@ export class ResponseVideoUploader extends Component {
       responseRank: 0,
       videoTitle: "",
       videoDescription: "",
+      videoHomework:"",
       hasTranscript: false,
       transcriptText: "",
       transcriptFileURL: "",
@@ -58,6 +59,7 @@ export class ResponseVideoUploader extends Component {
       responseRank: this.state.responseRank,
       videoTitle: this.state.videoTitle,
       videoDescription: this.state.videoDescription,
+      videoHomework: this.state.videoHomework,
       hasTranscript: this.state.hasTranscript,
       url: this.state.url,
       audioFileURL: this.state.audioFileURL,
@@ -134,6 +136,13 @@ export class ResponseVideoUploader extends Component {
               placeholder="a description of the video"
               name="videoDescription"
             /><br/>
+          <p>Homework: </p>
+              <input type="text" className='form-control'
+                value={this.state.videoHomework}
+                onChange={this.handleInputChange}
+                placeholder="homework for the video"
+                name="videoHomework"
+              /><br/>
           <p>Response Rank: </p>
           <input type="number" className='form-control'
             name="responseRank"

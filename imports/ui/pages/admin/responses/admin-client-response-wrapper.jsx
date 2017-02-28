@@ -6,14 +6,14 @@ import { Responses } from '../../../../../imports/api/responses/response-schema.
 import { ResponseVideos } from '../../../../../imports/api/video/response-video-schema.js';
 
 // Client Response (Admin View) Components
-import { PersonalMessage } from './components/personal-message.jsx';
-import { RecapVideo } from './components/recap-video.jsx';
-import { ResponseVideoUploader } from './components/additional-video-upload.jsx';
-import { AdditionalVideosWrapper } from './components/additional-videos.jsx';
-import { ResponseStatusBlock } from './components/response-status-block.jsx';
+import { PersonalMessage } from '../../../components/responses/personal-message.jsx';
+import { RecapVideo } from '../../../components/responses/recap-video.jsx';
+import { ResponseVideoUploader } from '../../../components/responses/additional-video-upload.jsx';
+import { AdditionalVideosWrapper } from '../../../components/responses/additional-videos.jsx';
+import { ResponseStatusBlock } from '../../../components/responses/response-status-block.jsx';
 
 // Styles
-import './pm.scss';
+import '../../../components/responses/pm.scss';
 
 export class AdminClientResponse extends React.Component {
     constructor(props){
