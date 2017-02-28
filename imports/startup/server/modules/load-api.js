@@ -24,3 +24,6 @@ import '../../../../imports/api/video/video-upload-rules.js';
 
 // email
 import '../../../../imports/api/email/list-methods.js';
+
+// cloudfront url signing methods
+import '../../../../imports/api/cloudfront/signed-urls.js';

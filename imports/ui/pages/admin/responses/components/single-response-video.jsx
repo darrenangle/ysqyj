@@ -5,11 +5,23 @@ import ReactPlayer from 'react-player'
 export class SingleResponseVideo extends Component {
   constructor(props){
     super(props);
-    this.state={
-
+    this.state = {
+      url: ""
     }
   }
 
+  componentWillMount(){
+    this.getSignedUrl();
+  }
+
+  getSignedUrl(){
+    var t = this;
+    Meteor.call('getSignedUrl.clientResponseVideo', this.props.video.cdnUrl, Meteor.userId(), function(error, signedUrl){
+      if (error) {console.log(error)} else {
+        t.setState({url: signedUrl})
+      }
+    })
+  }
   render(){
     return(
       <div className='single-response-video-wrapper row'>
@@ -20,7 +32,7 @@ export class SingleResponseVideo extends Component {
         <div className='col-xs-12 col-sm-6'>
           <ReactPlayer
             className=''
-            url={this.props.video.cdnUrl}
+            url={this.state.url}
             width="100%"
             height='100%'
             controls={true}

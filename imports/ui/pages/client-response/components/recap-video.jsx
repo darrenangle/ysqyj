@@ -6,8 +6,23 @@ export class RecapVideo extends Component {
   constructor(props){
     super(props);
     this.state = {
+      url: ""
     }
   }
+
+  componentWillMount(){
+    this.getSignedUrl();
+  }
+
+  getSignedUrl(){
+    var t = this;
+    Meteor.call('getSignedUrl.clientResponseVideo', this.props.url, Meteor.userId(), function(error, signedUrl){
+      if (error) {console.log(error)} else {
+        t.setState({url: signedUrl})
+      }
+    })
+  }
+
 
   renderVideoEl(){
 
@@ -15,7 +30,7 @@ export class RecapVideo extends Component {
       <div className='row'>
         <ReactPlayer
           className='col-xs-12'
-          url={this.props.url}
+          url={this.state.url}
           width="100%"
           height='100%'
           controls={true}
