@@ -108,6 +108,6 @@ export default ClientResponseContainer = createContainer( ({ params }) => {
     client: Meteor.users.find(clientId).fetch(),
     response: Responses.find({owner:clientId}).fetch(),
     recapVideo: ResponseVideos.find({owner: clientId, isRecapVideo: true}).fetch(),
-    videos:ResponseVideos.find({owner: clientId, isRecapVideo: false}).fetch(),
+    videos:ResponseVideos.find({owner: clientId, isRecapVideo: false}, {sort: {responseRank:1 }}).fetch(),
   }
 }, ClientResponse);

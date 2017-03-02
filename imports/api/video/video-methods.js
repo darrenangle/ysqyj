@@ -26,8 +26,8 @@ Meteor.methods({
     } else {
       // Create new video doc with URL
       let moddedDoc = doc;
-      moddedDoc.cdnUrl = cdn + doc.url.substring(doc.url.indexOf('/', 8));
-      moddedDoc.audioFileURL = moddedDoc.cdnUrl.replace("mp4","mp3"); 
+      moddedDoc.cdnUrl = cdn + doc.url.substring(doc.url.indexOf('/', 8)).replace(".MOV",".mp4");
+      moddedDoc.audioFileURL = moddedDoc.cdnUrl.replace("mp4","mp3");
 
       ResponseVideos.insert(moddedDoc, function(error, newId){
         if(error){ console.log(error )} else {

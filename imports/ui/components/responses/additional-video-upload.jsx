@@ -110,7 +110,13 @@ export class ResponseVideoUploader extends Component {
 
           console.log(fileURL);
         }
-      })
+      });
+      this.timer = setInterval(() => {
+        console.log(Math.ceil(uploader.progress() * 100))
+        if (Math.ceil(uploader.progress() * 100) === 100) {
+          clearInterval(this.timer);
+        }
+      }, 1000);
   }
 
   render(){
@@ -175,6 +181,13 @@ export class ResponseVideoUploader extends Component {
          <p>Upload video file: </p>
         <input className='form-control' type="file" id="response-video-input" onChange={this.uploadVideo} />
         </div><br/>
+      <p>Manually input URL </p>
+        <input type="text" className='form-control'
+          name="url"
+          min="0" max="500"
+          value={this.state.url}
+          onChange={this.handleInputChange}
+        />
       <button type = "button" className= "btn btn-primary" onClick={this.saveVideoDocToDB}>Upload Video Doc</button>
         <br/>
       </div>
