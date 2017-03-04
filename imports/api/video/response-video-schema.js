@@ -116,6 +116,12 @@ ResponseVideoSchema.ResponseVideo = new SimpleSchema({
     label: "The URL for the audio of this vid",
     optional: true
   },
+  posterUrl: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+    label: "The URL for the poster for this vid",
+    optional: true
+  },
   transcriptText: {
     type:String,
     max: 5000,

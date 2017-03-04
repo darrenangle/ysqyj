@@ -65,6 +65,7 @@ export class ClientResponse extends Component {
             />
             <hr/><br/>
               <RecapVideo
+                video={recapvid}
                 url={recapvid.cdnUrl}
               />
           </div>

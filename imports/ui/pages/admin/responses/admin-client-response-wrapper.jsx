@@ -52,6 +52,7 @@ export class AdminClientResponse extends React.Component {
               />
               <hr/><br/>
               <RecapVideo
+                video={recapvid}
                 url={recapvid.cdnUrl}
               />
             </div>

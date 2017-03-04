@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-const adminRole = Meteor.settings.private.adminSettings.role;
+const adminRole = "swolesneakmage";
 
 export const isAdmin = (userId) => {
   if (!userId || !Roles.userIsInRole(userId, adminRole)) {

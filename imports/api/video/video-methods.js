@@ -19,6 +19,17 @@ Meteor.methods({
     }
   },
 
+  'videos.editResponseVideo'(id,doc){
+    if(!isAdmin(this.userId)){
+      throw new Meteor.Error(403, "Access denied")
+    } else {
+      ResponseVideos.update({_id:id}, {$set: doc }, function(err,res){
+        if(err){console.log(err)} else{
+        }
+      })
+    }
+  },
+
   'videos.uploadResponseVideo'(doc){
     // check if requester is admin
     if(!isAdmin(this.userId)){
