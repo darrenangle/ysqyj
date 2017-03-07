@@ -61,7 +61,7 @@ export class SingleResponseVideo extends Component {
   renderReactPlayer(){
     return(
       <ReactPlayer
-        className=''
+        className='single-video-player'
         url={this.state.url}
         width="100%"
         height='100%'
