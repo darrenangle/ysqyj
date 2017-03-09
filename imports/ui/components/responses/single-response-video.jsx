@@ -14,14 +14,29 @@ export class SingleResponseVideo extends Component {
       posterUrl:""
     }
     this.showEditForm = this.showEditForm.bind(this);
-    this.getSignedPosterUrl = this.getSignedPosterUrl.bind(this);
-
+    this.getSignedUrls = this.getSignedUrls.bind(this);
   }
 
+
+
   componentWillMount(){
-    this.getSignedUrl();
-    this.getSignedAudioUrl();
-    this.getSignedPosterUrl();
+    this.getSignedUrls();
+  }
+
+  getSignedUrls(){
+    let urls = {
+      audioFileUrl: this.props.video.audioFileURL,
+      posterUrl: this.props.video.posterUrl,
+      cdnUrl: this.props.video.cdnUrl
+    }
+    let t = this;
+    Meteor.call('getResponseVideoUrls', urls, Meteor.userId(), function(error,signedUrls){
+      if (error) {console.log(error)} else {
+        console.log(signedUrls);
+        t.setState(signedUrls)
+      }
+    })
+
   }
 
   getSignedAudioUrl(){
