@@ -47,7 +47,7 @@ Meteor.startup( () => {
     <Router history={ browserHistory }>
       <Route path='/' component={ App }>
         <IndexRoute component={ HomePageLanding } />
-        <Route path='/landing-v1' component={LandingPage} />
+        <Route path='/landing-v1' component={LandingPage} onEnter={ requireAdmin }/>
 
 
 
