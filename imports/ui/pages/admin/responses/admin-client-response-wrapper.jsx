@@ -11,7 +11,8 @@ import { RecapVideo } from '../../../components/responses/recap-video.jsx';
 import { ResponseVideoUploader } from '../../../components/responses/additional-video-upload.jsx';
 import { AdditionalVideosWrapper } from '../../../components/responses/additional-videos.jsx';
 import { ResponseStatusBlock } from '../../../components/responses/response-status-block.jsx';
-
+import { AdditionalResourcesUploader } from '../../../components/responses/additional-resources-uploader.jsx';
+import { AdditionalResourcesWrapper } from '../../../components/responses/additional-resources.jsx';
 // Styles
 import '../../../components/responses/pm.scss';
 
@@ -28,6 +29,7 @@ export class AdminClientResponse extends React.Component {
       let response = this.props.response[0];
       let recapvid = this.props.recapVideo[0] || {cdnUrl:'http://techslides.com/demos/sample-videos/small.webm'};
       let additionalVideos = this.props.videos;
+      let additionalResources = this.props.response[0].additionalResources;
       return(
         <div className='container'>
           <div className='row'>
@@ -38,10 +40,16 @@ export class AdminClientResponse extends React.Component {
                 videos = {additionalVideos}
               />
             <br/><hr/><br/>
+              <AdditionalResourcesUploader
+                  responseId = { response._id }
+              />
+            <br/><hr/><br/>
                 <ResponseVideoUploader
                   clientId = {clientId}
                   responseId={response._id}
                 />
+
+              <br/><hr/><br/>
               <h1>Preview Response For {client.name || client.emails[0].address}</h1>
 
 
@@ -62,6 +70,9 @@ export class AdminClientResponse extends React.Component {
             responseId={response._id}
             clientId={clientId}
           />
+        <AdditionalResourcesWrapper
+            resources={additionalResources}
+        />
         </div>
       )
     }

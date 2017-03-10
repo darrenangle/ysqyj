@@ -53,8 +53,7 @@ ResponseSchema.Response = new SimpleSchema({
     type: String,
     label: "Personal Message to the client to go with Recap video",
     optional: true,
-    max: 2000,
-    optional: true
+    max: 2000
   },
   recapVideoId: {
     type:String,
@@ -70,6 +69,26 @@ ResponseSchema.Response = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Id,
     label: "The id of the additional response videos"
+  },
+  additionalResources:{
+    type: [Object],
+    optional: true
+  },
+  "additionalResources.$.resourceTitle":{
+    type: String,
+    label: "Title of the additional resource, link, video",
+    optional: true,
+    max: 500
+  },
+  "additionalResources.$.resourceDescription":{
+    type: String,
+    label: "Description of the additional resource",
+    optional: true,
+    max: 2000
+  },
+  "additionalResources.$.resourceUrl":{
+    type: String,
+    regEx: SimpleSchema.RegEx.Url
   },
   responseComplete: {
     type: Boolean

@@ -55,5 +55,19 @@ Meteor.methods({
       return 'not-authorized'
     }
 
+  },
+  'response.uploadAdditionalResource'(responseId, doc){
+    if(isAdmin(this.userId)){
+      
+      Responses.update({ _id: responseId }, { $push: { additionalResources: doc } }, function(err, res){
+        if(!err){
+          return 'updated!'
+        }
+      });
+
+    } else {
+      return 'not-authorized'
+    }
+
   }
 })

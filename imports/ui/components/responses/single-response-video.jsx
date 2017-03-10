@@ -32,39 +32,13 @@ export class SingleResponseVideo extends Component {
     let t = this;
     Meteor.call('getResponseVideoUrls', urls, Meteor.userId(), function(error,signedUrls){
       if (error) {console.log(error)} else {
-        console.log(signedUrls);
         t.setState(signedUrls)
       }
     })
 
   }
 
-  getSignedAudioUrl(){
-    var t = this;
-    Meteor.call('getSignedUrl.clientResponseVideo', this.props.video.audioFileURL, Meteor.userId(), function(error, signedUrl){
-      if (error) {console.log(error)} else {
-        t.setState({audioFileURL: signedUrl})
-      }
-    })
-  }
 
-  getSignedPosterUrl(){
-    var t = this;
-    Meteor.call('getSignedUrl.clientResponseVideo', this.props.video.posterUrl, Meteor.userId(), function(error, signedUrl){
-      if (error) {console.log(error)} else {
-        // console.log(signedUrl);
-        t.setState({posterUrl: signedUrl});
-      }
-    })
-  }
-  getSignedUrl(){
-    var t = this;
-    Meteor.call('getSignedUrl.clientResponseVideo', this.props.video.cdnUrl, Meteor.userId(), function(error, signedUrl){
-      if (error) {console.log(error)} else {
-        t.setState({url: signedUrl})
-      }
-    })
-  }
   showEditForm(event){
     if(!this.refs.editform.style.display || this.refs.editform.style.display=="none" ){
       this.refs.editform.style.display = "block";

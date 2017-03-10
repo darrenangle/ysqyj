@@ -17,7 +17,7 @@ Meteor.methods({
           keypairId: keypairId,
           privateKeyString: privatekeystring,
           expireTime: moment().add(4, 'hours')
-        }
+        } 
         let signedUrls = {};
         signedUrls.url = urls.cdnUrl ? cloudfront.getSignedUrl(urls.cdnUrl, options) : "";
         signedUrls.audioFileURL = urls.audioFileURL ? cloudfront.getSignedUrl(urls.audioFileURL, options) : "";

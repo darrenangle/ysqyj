@@ -9,7 +9,7 @@
 .recap-video-wrapper {
   h2 {
     font-size: 30px;
-    color: #ff9919;
+    color: #408cff;
     margin-bottom: 20px;
   }
   h4 {
@@ -65,5 +65,12 @@
   &:hover{
     text-decoration: underline;
     cursor: pointer;
+  }
+}
+
+.additional-resources-wrapper {
+  margin-bottom: 100px;
+  h2 {
+    color: #7a889c;
   }
 }
