@@ -7,6 +7,8 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import { App } from '../../ui/layouts/app.jsx';
 import HomePageLanding from '../../ui/pages/landing/homepage-wrapper.jsx';
+import LandingPage from '../../ui/pages/landing/landing-v1.jsx';
+import { NotFound } from '../../ui/pages/not-found.jsx';
 
 // User Account MGMT Routes
 import QuickLogin from '../../ui/pages/login.jsx';
@@ -23,12 +25,6 @@ import DisclaimerWrapper from '../../ui/pages/legal/disclaimer-wrapper.jsx';
 import TermsWrapper from '../../ui/pages/legal/terms-wrapper.jsx';
 import Privacy from '../../ui/pages/legal/privacy.jsx';
 
-
-// Pages to delete
-import PageOne from '../../ui/pages/one.jsx';
-import { PageTwo } from '../../ui/pages/two.jsx';
-import { Hello } from '../../ui/pages/hello.jsx';
-import { NotFound } from '../../ui/pages/not-found.jsx';
 
 // Route onEnter functions
 import { requireAdmin } from './route-security.js'
@@ -51,12 +47,9 @@ Meteor.startup( () => {
     <Router history={ browserHistory }>
       <Route path='/' component={ App }>
         <IndexRoute component={ HomePageLanding } />
+        <Route path='/landing-v1' component={LandingPage} />
 
 
-        {/* Learning Routes TO BE DELETED*/}
-        <Route path='/one' component={ PageOne }/>
-        <Route path='/two' component={ PageTwo }/>
-        <Route path='/hello/:name' component={ Hello } onEnter={ requireAuth } />
 
         {/* User Routes*/}
         <Route path='/login' component={QuickLogin} />
