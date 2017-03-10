@@ -25,7 +25,7 @@ export class SingleResponseVideo extends Component {
 
   getSignedUrls(){
     let urls = {
-      audioFileUrl: this.props.video.audioFileURL,
+      audioFileURL: this.props.video.audioFileURL,
       posterUrl: this.props.video.posterUrl,
       cdnUrl: this.props.video.cdnUrl
     }

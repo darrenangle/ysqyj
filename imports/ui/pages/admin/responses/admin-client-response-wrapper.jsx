@@ -29,7 +29,7 @@ export class AdminClientResponse extends React.Component {
       let response = this.props.response[0];
       let recapvid = this.props.recapVideo[0] || {cdnUrl:'http://techslides.com/demos/sample-videos/small.webm'};
       let additionalVideos = this.props.videos;
-      let additionalResources = this.props.response[0].additionalResources;
+      let additionalResources = this.props.response[0].additionalResources || [];
       return(
         <div className='container'>
           <div className='row'>

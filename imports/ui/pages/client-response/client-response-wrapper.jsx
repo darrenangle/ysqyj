@@ -13,6 +13,8 @@ import { PersonalMessage } from '../../components/responses/personal-message.jsx
 import { RecapVideo } from '../../components/responses/recap-video.jsx';
 import { AdditionalVideosWrapper } from '../../components/responses/additional-videos.jsx';
 import { ResponseLogin } from '../../components/responses/response-login.jsx';
+import { AdditionalResourcesWrapper } from '../../components/responses/additional-resources.jsx';
+
 import '../../components/responses/pm.scss';
 
 export class ClientResponse extends Component {
@@ -43,6 +45,8 @@ export class ClientResponse extends Component {
     let response = this.props.response[0];
     let recapvid = this.props.recapVideo[0] || {cdnUrl:'http://techslides.com/demos/sample-videos/small.webm'};
     let additionalVideos = this.props.videos;
+    let additionalResources = this.props.response[0].additionalResources || [];
+
 
     if(!response || !response.responseComplete){
       return(
@@ -74,6 +78,9 @@ export class ClientResponse extends Component {
           videos={additionalVideos}
           responseId={response._id}
           clientId={clientId}
+        />
+        <AdditionalResourcesWrapper
+            resources={additionalResources}
         />
       </div>
     )

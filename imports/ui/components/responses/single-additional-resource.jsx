@@ -10,7 +10,7 @@ export class SingleAdditionalResource extends Component {
     return(
       <div className='single-additional-resource'>
         <h3>
-          <a href={this.props.resource.resourceUrl}>
+          <a href={this.props.resource.resourceUrl} target="_blank">
             {this.props.resource.resourceTitle}
           </a>
         </h3>
