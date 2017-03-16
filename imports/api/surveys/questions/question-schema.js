@@ -40,11 +40,12 @@ QuestionSchema.Question = new SimpleSchema({
     max: 2000
   },
   tags:{
-    type: [String]
+    type: [Object]
   },
-  "tags.$":{
-    optional: true
-    max: 200
+  "tags.$.tagText":{
+    type: String,
+    max: 200,
+    optiona: true
   }
-
+    
 });
