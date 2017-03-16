@@ -27,3 +27,6 @@ import '../../../../imports/api/email/list-methods.js';
 
 // cloudfront url signing methods
 import '../../../../imports/api/cloudfront/signed-urls.js';
+
+// Stripe Methods
+import '../../../../imports/api/stripe/stripe.js';
