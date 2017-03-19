@@ -6,7 +6,7 @@ export default class HomePageLanding extends Component {
     return(
       <div className='container'>
         <div className='col-md-6 col-md-offset-3 margin-top-100'>
-          <h1>You Should Quit Your Job</h1>
+          <h1>YOU SHOULD QUIT<br/> YOUR JOB</h1>
           <hr/>
           <br/>
           <p className='landing-text'>We're working hard to help you do the work you were made for.

@@ -8,6 +8,8 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { App } from '../../ui/layouts/app.jsx';
 import HomePageLanding from '../../ui/pages/landing/homepage-wrapper.jsx';
 import LandingPage from '../../ui/pages/landing/landing-v1.jsx';
+import LandingPageV2 from '../../ui/pages/landing/landing-v2.jsx';
+
 import { NotFound } from '../../ui/pages/not-found.jsx';
 
 // User Account MGMT Routes
@@ -48,6 +50,7 @@ Meteor.startup( () => {
       <Route path='/' component={ App }>
         <IndexRoute component={ HomePageLanding } />
         <Route path='/landing-v1' component={LandingPage} onEnter={ requireAdmin }/>
+        <Route path='/landing-v2' component={LandingPageV2} onEnter={ requireAdmin }/>
 
 
 

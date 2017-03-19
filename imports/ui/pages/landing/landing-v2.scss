@@ -1,0 +1,61 @@
+.landing-page-wrapper {
+  padding: 0;
+}
+.headline-quote-wrapper{
+    text-align: center;
+
+}
+
+.headline-quote {
+  color: rgba(0,0,0,0.87);
+  font-size: 21px;
+  font-weight: 100;
+  h1{
+      font-style: italic;
+      font-family: "Cardo", serif;
+      font-weight: 400;
+      font-style: normal;
+      color: rgba(0,0,0,0.87);
+      font-size: 48px;
+      line-height: 55px;
+
+  }
+
+}
+
+hr.short-divider{
+  margin-top: 40px;
+  margin-bottom: 40px;
+  min-width: 200px;
+  width: 50%;
+  border-top: 2px solid #408cff;
+}
+
+.subheadline-wrapper{
+  text-align: center;
+
+  h2.subheadline {
+      font-size: 20px;
+      line-height: 30px;
+      color: rgba(0,0,0,0.80);
+  }
+  .tiny-joke {
+    font-size: 75%;
+    line-height: 20px;
+    color: rgba(0,0,0,0.60);
+  }
+  .tinier-joke {
+    font-size: 60%;
+    line-height: 20px;
+    color: rgba(0,0,0,0.50);
+  }
+}
+
+.offwhite-background {
+    background-color: #f1f1f1;
+}
+
+.landing-header-wrapper {
+  padding-top: 85px;
+  padding-bottom: 85px;
+}
