@@ -1,10 +1,15 @@
 .navbar-default {
-    background-color: #ffffff;
-    border-color: #e2e2e2;
+    background-color: black;
+    border-bottom: 2px solid #408cff;
     margin-bottom: 0px;
+    font-family: 'Chivo', sans-serif;
+    a{
+      color: white !important;
+    }
+
     .navbar-brand {
 		font-family: 'Chivo', sans-serif;
-		color: #424242;
+		color: white;
 	    font-weight: 600;
 	    font-size: 23px;
 	}

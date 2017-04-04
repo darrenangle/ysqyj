@@ -18,7 +18,7 @@ export default class NavBar extends Component {
         </div>
         <div id="navbar" className="navbar-collapse collapse">
           <ul className="nav navbar-nav">
-            <li className="active"><a href="#">Home</a></li>
+            <li className=""><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
             <li className="dropdown">
@@ -36,7 +36,7 @@ export default class NavBar extends Component {
           </ul>
           <ul className="nav navbar-nav navbar-right">
             <li><a href="../navbar/">Default</a></li>
-            <li className="active"><a href="./">Static top <span className="sr-only">(current)</span></a></li>
+            <li className=""><a href="./">Static top <span className="sr-only">(current)</span></a></li>
             <li><a href="../navbar-fixed-top/">Fixed top</a></li>
           </ul>
         </div>
@@ -45,7 +45,3 @@ export default class NavBar extends Component {
     )
   }
 }
-
-
-
-
