@@ -9,8 +9,11 @@ import { App } from '../../ui/layouts/app.jsx';
 import HomePageLanding from '../../ui/pages/landing/homepage-wrapper.jsx';
 import LandingPage from '../../ui/pages/landing/landing-v1.jsx';
 import LandingPageV2 from '../../ui/pages/landing/landing-v2.jsx';
-
 import { NotFound } from '../../ui/pages/not-found.jsx';
+
+// Client Onboarding / Payments
+import CoachingApplication from '../../ui/pages/coaching-application/coaching-application.jsx';
+
 
 // User Account MGMT Routes
 import QuickLogin from '../../ui/pages/login.jsx';
@@ -59,6 +62,7 @@ Meteor.startup( () => {
         <Route path='/get-started' component={GetStarted} />
         <Route path='/my-response' component={ ClientResponse } />
         {/*<Route path='/responses/:id' component={ AdminClientResponse } onEnter={ requireOwner }/> */}
+        <Route path='/apply' component={ CoachingApplication } />
 
 
         {/* Admin Routes */}

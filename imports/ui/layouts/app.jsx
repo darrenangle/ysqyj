@@ -1,6 +1,8 @@
 import React from 'react';
 
+
 export const App = ( { children } ) => (
+
   <div>
 
 
@@ -12,4 +14,5 @@ export const App = ( { children } ) => (
     { children }
 
   </div>
+  
 )
