@@ -28,8 +28,57 @@ export default class CoachingApplication extends Component {
       {label: 'I wish I could get paid to do what I love', value: 'paid-for-fun'}
     ]
   }
-  submitConsultationRequest(){
 
+  sendErrorMessageToClient(errorMessage){
+    Bert.alert(errorMessage, 'danger');
+  }
+
+  checkApplicationForm(){
+    // Probably want to validate this in the browser
+    const currentForm = this.state;
+    let errorMessage = "";
+
+    switch(true) {
+      case (!currentForm.firstName):
+        errorMessage = "Please enter your first name."
+      break;
+      case (!currentForm.lastName):
+        errorMessage = "Please enter your last name."
+      break;
+      case (!currentForm.email):
+        errorMessage = "Please enter your email address."
+      break;
+      case (!currentForm.helpWithTheseIssues || currentForm.helpWithTheseIssues == [] ):
+        errorMessage = "Please select an issue I can you help with."
+      break;
+      case (!currentForm.answer10KQuestion || !currentForm.answerIdealCareerQuestion || !currentForm.answerObstaclesQuestion || !currentForm.answerOutsiderPerspectiveQuestion || !currentForm.answerBiggestIssueQuestion):
+        errorMessage = "Please answer the ALL of the Revealing Questions"
+      break;
+      case (currentForm.answer10KQuestion.length < 140 || currentForm.answerIdealCareerQuestion.length < 140 || currentForm.answerObstaclesQuestion.length < 140  || currentForm.answerOutsiderPerspectiveQuestion.length < 140 || currentForm.answerBiggestIssueQuestion.length < 140):
+        errorMessage = "Some of your answers are shorter than a Tweet! Can you say more?"
+      break;
+    }
+
+    if (errorMessage != ""){
+      this.sendErrorMessageToClient(errorMessage)
+      return;
+    } else {
+      this.submitConsultationRequest();
+    }
+  }
+
+  this.hideFormFor1Day(){
+    console.log(' clear the form, get rid of the application, place a cookie');
+  }
+
+  submitConsultationRequest(){
+    Meteor.call('submitConsultationRequest', this.state, function(err,res){
+      if (err) {
+        this.sendErrorMessageToClient(err.reason);
+      } else {
+        this.hideFormFor1Day();
+      }
+    })
   }
   render(){
     return(
@@ -66,27 +115,29 @@ export default class CoachingApplication extends Component {
               <p>Please email me at darren@youshouldquityourjob.com if you have any questions. Looking forward to meeting you!</p>
             </div>
             <div className='coaching-application-form col-sm-10 col-sm-offset-1'>
-              <Form state={this.state} className='col-sm-10' onChange={changes => this.setState(changes)}>
+              <Form
+                state={this.state}
+                className='col-sm-10'
+                onChange={changes => this.setState(changes)}>
                 <p><br/><strong>Your contact info:</strong></p>
                 <Field fieldName='firstName' label='First Name' type={Text}/>
                 <Field fieldName='lastName' label='Last Name' type={Text}/>
                 <Field fieldName='email' label='Your Best Email Address' type={Text}/><br/>
                 <p><br/><strong>What can I help you with? (Select all that apply)</strong></p>
                 <Field fieldName='helpWithTheseIssues' label='' type={MultipleCheckbox} options={this.getCareerHelpChoices()}/>
-
                 <h3>Revealing Questions</h3>
                 <p>These questions were written, tested, and rewritten to reveal as much about you and your situation as possible. Take your time, but don't erase. Everything you write is valuable to our work together! EVERYTHING!</p>
-                <p class='survey-question'><br/><strong>1. If you had $10,000 to spend on yourself (not debts, bills, or family), what would you buy and why?</strong></p>
-                <Field className='' fieldName='10K-question' label='Type your answer here' hintText='Go crazy!' type={Textarea} rows={2}/>
-                <p class='survey-question'><br/><strong>2. What is the ideal situation you hope to find yourself in professionally and creatively? If you 'had it all', on your terms, what would that look like? What are you doing every day?</strong></p>
-                <Field className='' fieldName='ideal-career-question' label='Type your answer here' hintText='Don’t hold back!' type={Textarea} rows={2}/>
-                <p class='survey-question'><br/><strong>3. What do you think are your biggest obstacles to experiencing some or all of that dream?</strong></p>
-                <Field className='' fieldName='obstacles-question' label='Type your answer here' hintText='Be honest!' type={Textarea} rows={2}/>
-                <p class='survey-question'><br/><strong>4. How might someone who doesn't know you all that well describe your bad habits? What would a well-intentioned stranger say is holding you back?</strong></p>
-                <Field className='' fieldName='outsider-perspective-question' label='Type your answer here' hintText='This one’s tough. You got it!' type={Textarea} rows={2}/>
-                <p class='survey-question'><br/><strong>5. If we only talked about one problem, what would you want it to be? What would you give attention to?</strong></p>
-                <Field className='' fieldName='biggest-issue-question' label='Type your answer here' hintText='What’s *really* important?' type={Textarea} rows={2}/>
-                <RaisedButton className='send-application-button' label="SEND APPLICATION" primary={true} />
+                <p className='survey-question'><br/><strong>1. If you had $10,000 to spend on yourself (not debts, bills, or family), what would you buy and why?</strong></p>
+                <Field className='' fieldName='answer10KQuestion' label='Type your answer here' hintText='Go crazy!' type={Textarea} rows={2}/>
+                <p className='survey-question'><br/><strong>2. What is the ideal situation you hope to find yourself in professionally and creatively? If you 'had it all', on your terms, what would that look like? What are you doing every day?</strong></p>
+                <Field className='' fieldName='answerIdealCareerQuestion' label='Type your answer here' hintText='Don’t hold back!' type={Textarea} rows={2}/>
+                <p className='survey-question'><br/><strong>3. What do you think are your biggest obstacles to experiencing some or all of that dream?</strong></p>
+                <Field className='' fieldName='answerObstaclesQuestion' label='Type your answer here' hintText='Be honest!' type={Textarea} rows={2}/>
+                <p className='survey-question'><br/><strong>4. How might someone who doesn't know you all that well describe your bad habits? What would a well-intentioned stranger say is holding you back?</strong></p>
+                <Field className='' fieldName='answerOutsiderPerspectiveQuestion' label='Type your answer here' hintText='This one’s tough. You got it!' type={Textarea} rows={2}/>
+                <p className='survey-question'><br/><strong>5. If we only talked about one problem, what would you want it to be? What would you give attention to?</strong></p>
+                <Field className='' fieldName='answerBiggestIssueQuestion' label='Type your answer here' hintText='What’s *really* important?' type={Textarea} rows={2}/>
+                <RaisedButton className='send-application-button' label="SEND APPLICATION" primary={true} onTouchTap={() => this.checkApplicationForm()} />
             </Form>
 
               <p>
