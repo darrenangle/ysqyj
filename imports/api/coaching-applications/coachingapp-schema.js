@@ -10,15 +10,9 @@ CoachingApplications.deny({
   remove() { return true; },
 });
 
-const CoachingApplicationSchema = {};
+export const CoachingApplicationSchema = {};
 
 CoachingApplicationSchema.CoachingApplication = new SimpleSchema({
-  _id: {
-    type:String,
-    denyUpdate: true,
-    regEx: SimpleSchema.RegEx.Id,
-    label: "The ID of the application db object"
-  },
   createdAt: {
     type: Date,
     label: "Day the application was created",
@@ -85,3 +79,5 @@ CoachingApplicationSchema.CoachingApplication = new SimpleSchema({
     max: 10000
   }
 })
+
+CoachingApplications.attachSchema(CoachingApplicationSchema.CoachingApplication);

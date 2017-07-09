@@ -21,6 +21,11 @@ import '../../../../imports/api/video/video-methods.js';
 import '../../../../imports/api/video/video-publications.js';
 import '../../../../imports/api/video/video-upload-rules.js';
 
+// Coaching Application
+import '../../../../imports/api/coaching-applications/coachingapp-schema.js';
+import '../../../../imports/api/coaching-applications/coachingapp-methods.js';
+
+
 
 // email
 import '../../../../imports/api/email/list-methods.js';

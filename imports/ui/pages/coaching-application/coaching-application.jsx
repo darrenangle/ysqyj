@@ -9,13 +9,18 @@ import MultipleCheckbox from 'simple-react-form-material-ui/lib/multiple-checkbo
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import { Cookies } from 'meteor/ostrio:cookies';
 injectTapEventPlugin();
+
+const cookies = new Cookies();
+Meteor.cookies = new Cookies();
 
 export default class CoachingApplication extends Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {
+      applicationSubmitted: false
+    };
   }
   getCareerHelpChoices(){
     return [
@@ -67,19 +72,71 @@ export default class CoachingApplication extends Component {
     }
   }
 
-  this.hideFormFor1Day(){
-    console.log(' clear the form, get rid of the application, place a cookie');
+  hideFormFor1Day(){
+    this.setState({'applicationSubmitted': true});
+    cookies.set('applicationSubmitted', 'Application Recieved: ' + new Date());
   }
 
   submitConsultationRequest(){
-    Meteor.call('submitConsultationRequest', this.state, function(err,res){
+    var t = this;
+    Meteor.call('submitCoachingApplication', this.state, function(err,res){
       if (err) {
-        this.sendErrorMessageToClient(err.reason);
+        t.sendErrorMessageToClient("Ooops!, there was a problem: "+err.reason);
       } else {
-        this.hideFormFor1Day();
+        t.hideFormFor1Day();
       }
     })
   }
+
+  renderFormOrNah(){
+    if( !cookies.has('applicationSubmitted') ||   this.state.applicationSubmitted == false){
+
+      return(
+              <div className='coaching-application-form-wrapper container'>
+                  <div className='col-sm-10 col-sm-offset-1'>
+                    <h3>Before we meet, I’d like to get to know you better.</h3>
+                    <h4>Your answers will help me make sure we’re a good fit for each other, and help me structure and prepare our one-on-ones as effectively as possible.</h4>
+                    <p>Once I’ve reviewed your application, I’ll reach out to schedule our first meeting (and send you a private link for payment).</p>
+                    <p>Please email me at darren@youshouldquityourjob.com if you have any questions. Looking forward to meeting you!</p>
+                  </div>
+                  <div className='coaching-application-form col-sm-10 col-sm-offset-1'>
+                    <Form
+                      state={this.state}
+                      className='col-sm-10'
+                      onChange={changes => this.setState(changes)}>
+                      <p><br/><strong>Your contact info:</strong></p>
+                      <Field fieldName='firstName' label='First Name' type={Text}/>
+                      <Field fieldName='lastName' label='Last Name' type={Text}/>
+                      <Field fieldName='email' label='Your Best Email Address' type={Text}/><br/>
+                      <p><br/><strong>What can I help you with? (Select all that apply)</strong></p>
+                      <Field fieldName='helpWithTheseIssues' label='' type={MultipleCheckbox} options={this.getCareerHelpChoices()}/>
+                      <h3>Revealing Questions</h3>
+                      <p>These questions were written, tested, and rewritten to reveal as much about you and your situation as possible. Take your time, but don't erase. Everything you write is valuable to our work together! EVERYTHING!</p>
+                      <p className='survey-question'><br/><strong>1. If you had $10,000 to spend on yourself (not debts, bills, or family), what would you buy and why?</strong></p>
+                      <Field className='' fieldName='answer10KQuestion' label='Type your answer here' hintText='Go crazy!' type={Textarea} rows={2}/>
+                      <p className='survey-question'><br/><strong>2. What is the ideal situation you hope to find yourself in professionally and creatively? If you 'had it all', on your terms, what would that look like? What are you doing every day?</strong></p>
+                      <Field className='' fieldName='answerIdealCareerQuestion' label='Type your answer here' hintText='Don’t hold back!' type={Textarea} rows={2}/>
+                      <p className='survey-question'><br/><strong>3. What do you think are your biggest obstacles to experiencing some or all of that dream?</strong></p>
+                      <Field className='' fieldName='answerObstaclesQuestion' label='Type your answer here' hintText='Be honest!' type={Textarea} rows={2}/>
+                      <p className='survey-question'><br/><strong>4. How might someone who doesn't know you all that well describe your bad habits? What would a well-intentioned stranger say is holding you back?</strong></p>
+                      <Field className='' fieldName='answerOutsiderPerspectiveQuestion' label='Type your answer here' hintText='This one’s tough. You got it!' type={Textarea} rows={2}/>
+                      <p className='survey-question'><br/><strong>5. If we only talked about one problem, what would you want it to be? What would you give attention to?</strong></p>
+                      <Field className='' fieldName='answerBiggestIssueQuestion' label='Type your answer here' hintText='What’s *really* important?' type={Textarea} rows={2}/>
+                      <RaisedButton className='send-application-button' label="SEND APPLICATION" primary={true} onTouchTap={() => this.checkApplicationForm()} />
+                  </Form>
+
+                    <p>
+                      {JSON.stringify(this.state, null, 2)}
+                    </p>
+                  </div>
+                </div>)
+    } else {
+      return (
+        <h3>Thanks for submitting your application. Dont ever play yourself.</h3>
+      )
+    }
+  }
+
   render(){
     return(
       <MuiThemeProvider>
@@ -106,49 +163,9 @@ export default class CoachingApplication extends Component {
                   <p>(You’re doing it. You’re taking the leap! YES! Bravo!)</p>
                 </div>
             </div>
+            {this.renderFormOrNah()}
 
-          <div className='coaching-application-form-wrapper container'>
-            <div className='col-sm-10 col-sm-offset-1'>
-              <h3>Before we meet, I’d like to get to know you better.</h3>
-              <h4>Your answers will help me make sure we’re a good fit for each other, and help me structure and prepare our one-on-ones as effectively as possible.</h4>
-              <p>Once I’ve reviewed your application, I’ll reach out to schedule our first meeting (and send you a private link for payment).</p>
-              <p>Please email me at darren@youshouldquityourjob.com if you have any questions. Looking forward to meeting you!</p>
-            </div>
-            <div className='coaching-application-form col-sm-10 col-sm-offset-1'>
-              <Form
-                state={this.state}
-                className='col-sm-10'
-                onChange={changes => this.setState(changes)}>
-                <p><br/><strong>Your contact info:</strong></p>
-                <Field fieldName='firstName' label='First Name' type={Text}/>
-                <Field fieldName='lastName' label='Last Name' type={Text}/>
-                <Field fieldName='email' label='Your Best Email Address' type={Text}/><br/>
-                <p><br/><strong>What can I help you with? (Select all that apply)</strong></p>
-                <Field fieldName='helpWithTheseIssues' label='' type={MultipleCheckbox} options={this.getCareerHelpChoices()}/>
-                <h3>Revealing Questions</h3>
-                <p>These questions were written, tested, and rewritten to reveal as much about you and your situation as possible. Take your time, but don't erase. Everything you write is valuable to our work together! EVERYTHING!</p>
-                <p className='survey-question'><br/><strong>1. If you had $10,000 to spend on yourself (not debts, bills, or family), what would you buy and why?</strong></p>
-                <Field className='' fieldName='answer10KQuestion' label='Type your answer here' hintText='Go crazy!' type={Textarea} rows={2}/>
-                <p className='survey-question'><br/><strong>2. What is the ideal situation you hope to find yourself in professionally and creatively? If you 'had it all', on your terms, what would that look like? What are you doing every day?</strong></p>
-                <Field className='' fieldName='answerIdealCareerQuestion' label='Type your answer here' hintText='Don’t hold back!' type={Textarea} rows={2}/>
-                <p className='survey-question'><br/><strong>3. What do you think are your biggest obstacles to experiencing some or all of that dream?</strong></p>
-                <Field className='' fieldName='answerObstaclesQuestion' label='Type your answer here' hintText='Be honest!' type={Textarea} rows={2}/>
-                <p className='survey-question'><br/><strong>4. How might someone who doesn't know you all that well describe your bad habits? What would a well-intentioned stranger say is holding you back?</strong></p>
-                <Field className='' fieldName='answerOutsiderPerspectiveQuestion' label='Type your answer here' hintText='This one’s tough. You got it!' type={Textarea} rows={2}/>
-                <p className='survey-question'><br/><strong>5. If we only talked about one problem, what would you want it to be? What would you give attention to?</strong></p>
-                <Field className='' fieldName='answerBiggestIssueQuestion' label='Type your answer here' hintText='What’s *really* important?' type={Textarea} rows={2}/>
-                <RaisedButton className='send-application-button' label="SEND APPLICATION" primary={true} onTouchTap={() => this.checkApplicationForm()} />
-            </Form>
-
-              <p>
-                {JSON.stringify(this.state, null, 2)}
-              </p>
-            </div>
-
-          </div>
-
-
-      </div>
+        </div>
       </MuiThemeProvider>
     )
   }
